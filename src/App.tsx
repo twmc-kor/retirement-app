@@ -1,8 +1,14 @@
-import React from 'react';
-import MainApp from './app/main';
+import React from "react";
+import MainApp from "./app/main";
+import GlobalStyle from "./style/styles";
 
 function App() {
-    return <MainApp />;
+  return (
+    <>
+      <GlobalStyle />
+      <MainApp />
+    </>
+  );
 }
 
 export default App;
