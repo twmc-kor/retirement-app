@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Header } from '../../components';
 import { BlackBoard } from '../../components/black-board.component';
 import { PostTotalCount } from '../../components/post-total-count.component';
-import { Icon, Wrapper } from '../../components/styles';
+import { Icon, PageTitle, Wrapper } from '../../components/styles';
+import { Styles } from '../../style/styles';
 
 const ClassRoomPage = (): JSX.Element => {
     return (
         <Wrapper>
             <Header back={false} title={'꽃길레터'} />
             <PageTitleWrapper>
-                <PageTitle>
+                <PageTitle sub>
                     지금까지
                     <PostTotalCount count={22} />
                     개의 마음이 전달되었어요!
@@ -22,6 +23,44 @@ const ClassRoomPage = (): JSX.Element => {
                 <Text>메세지 전달일</Text>
                 <BlackBoard dday={21} />
             </BlackBoardWrapper>
+            <MessageButtonWrapper>
+                <Icon
+                    src="/img/sm_bg.png"
+                    width="96px"
+                    height="112px"
+                    marginBottom="16px"
+                />
+                <Icon
+                    src="/img/sm_bg.png"
+                    width="96px"
+                    height="112px"
+                    marginBottom="16px"
+                />
+                <Icon
+                    src="/img/sm_bg.png"
+                    width="96px"
+                    height="112px"
+                    marginBottom="16px"
+                />
+                <Icon
+                    src="/img/sm_bg.png"
+                    width="96px"
+                    height="112px"
+                    marginBottom="16px"
+                />
+                <Icon
+                    src="/img/sm_bg.png"
+                    width="96px"
+                    height="112px"
+                    marginBottom="16px"
+                />
+                <Icon
+                    src="/img/sm_bg.png"
+                    width="96px"
+                    height="112px"
+                    marginBottom="16px"
+                />
+            </MessageButtonWrapper>
             <Link to="/user-styling">메세지 쓰기</Link>
         </Wrapper>
     );
@@ -35,16 +74,6 @@ const PageTitleWrapper = styled.div`
     width: 100%;
 `;
 
-const PageTitle = styled.span<{ textColor?: string }>`
-    width: 195px;
-    margin: 18px 30px;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 20px;
-    /* color: ${({ textColor }) => (textColor ? textColor : '#693f08')}; */
-    color: #693f08;
-`;
-
 const BlackBoardWrapper = styled.div`
     position: relative;
 `;
@@ -54,8 +83,13 @@ const Text = styled.span`
     display: flex;
     top: calc(50% - 23px);
     left: calc(50% - 50px);
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 16px;
-    color: #000;
+    ${Styles.FONT.SUB_TEXT};
+    color: ${Styles.COLOR.WHITE};
+`;
+
+const MessageButtonWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: calc(100% - 40px);
 `;
