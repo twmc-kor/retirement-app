@@ -1,22 +1,31 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Styles } from '../style/styles';
+import { Drawer } from './drawer.component';
 import { IHeader } from './interface';
-import { Icon } from './styles';
+import { DefaultButton, Icon } from './styles';
 
 /**
  * 헤더
  */
-export const Header: FC<IHeader> = ({ back = true, title = '꽃길레터' }) => {
+export const Header: FC<IHeader> = ({ back = true, title }) => {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    const handleOpenDrawer = () => {
+        setIsDrawerOpen(true);
+    };
+
     return (
         <Wrapper>
-            <IconWrapper left="20px" to="/class-room">
+            <IconWrapper left="20px">
                 {back && <Icon src="/img/back_btn.png" />}
             </IconWrapper>
             <Title>{title}</Title>
-            <IconWrapper right="20px" to="">
+            <IconWrapper right="20px" onClick={handleOpenDrawer}>
                 <Icon src="/img/menu_btn.png" />
             </IconWrapper>
+            <Drawer open={isDrawerOpen} />
         </Wrapper>
     );
 };
@@ -29,10 +38,10 @@ const Wrapper = styled.div`
     align-items: center;
     width: 360px;
     height: 56px;
-    background-color: #c2dbff;
+    background-color: ${Styles.COLOR.HEADER};
 `;
 
-const IconWrapper = styled(Link)<{
+const IconWrapper = styled(DefaultButton)<{
     top?: string;
     left?: string;
     right?: string;
@@ -45,8 +54,6 @@ const IconWrapper = styled(Link)<{
 `;
 
 const Title = styled.span`
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 26px;
-    color: #fff;
+    ${Styles.FONT.TITLE_NAME};
+    color: ${Styles.COLOR.WHITE};
 `;
