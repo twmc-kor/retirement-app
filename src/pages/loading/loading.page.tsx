@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Icon } from '../../components/styles';
 
 const Loading = (): JSX.Element => {
     const navigate = useNavigate();
@@ -7,11 +8,7 @@ const Loading = (): JSX.Element => {
     useEffect(() => {
         setTimeout(() => navigate('/'), 3000);
     }, []);
-    return (
-        <div>
-            <h1>LOADING PAGE</h1>
-        </div>
-    );
+    return <Icon src="/img/loading_img.png" width="100%" height="100%" />;
 };
 
 export default Loading;
