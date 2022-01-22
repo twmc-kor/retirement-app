@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
-    ClassRoomPage,
     IndexPage,
+    OnboardingPage,
+    ClassRoomPage,
     MessagePage,
     NotFoundPage,
     UserStylingPage,
@@ -14,6 +15,7 @@ const MainApp = (): JSX.Element => {
         <BrowserRouter>
             <Routes>
                 <Route path={`/`} element={<IndexPage />} />
+                <Route path={`/onboarding`} element={<OnboardingPage />} />
                 <Route path={`/class-room`} element={<ClassRoomPage />} />
                 <Route path={`/user-styling`} element={<UserStylingPage />} />
                 <Route path={`/message`} element={<MessagePage />} />
