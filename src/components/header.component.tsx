@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Styles } from '../style/styles';
@@ -10,7 +11,12 @@ import { DefaultButton, Icon } from './styles';
  * 헤더
  */
 export const Header: FC<IHeader> = ({ back = true, title }) => {
+    const navigate = useNavigate();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    const handleGoBack = () => {
+        navigate(-1);
+    };
 
     const handleOpenDrawer = () => {
         setIsDrawerOpen(true);
@@ -18,7 +24,7 @@ export const Header: FC<IHeader> = ({ back = true, title }) => {
 
     return (
         <Wrapper>
-            <IconWrapper left="20px">
+            <IconWrapper left="20px" onClick={handleGoBack}>
                 {back && <Icon src="/img/back_btn.png" />}
             </IconWrapper>
             <Title>{title}</Title>
