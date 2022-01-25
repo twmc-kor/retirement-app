@@ -7,7 +7,7 @@ import {
     MessagePage,
     NotFoundPage,
     UserStylingPage,
-    Loading,
+    LoadingPage,
 } from '../pages';
 
 const MainApp = (): JSX.Element => {
@@ -19,7 +19,7 @@ const MainApp = (): JSX.Element => {
                 <Route path={`/class-room`} element={<ClassRoomPage />} />
                 <Route path={`/user-styling`} element={<UserStylingPage />} />
                 <Route path={`/message`} element={<MessagePage />} />
-                <Route path={`/loading`} element={<Loading />} />
+                <Route path={`/loading`} element={<LoadingPage />} />
                 <Route element={<NotFoundPage />} />
             </Routes>
         </BrowserRouter>
