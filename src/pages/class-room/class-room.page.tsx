@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { Header } from '../../components';
-import { BlackBoard } from '../../components/black-board.component';
-import { PostTotalCount } from '../../components/post-total-count.component';
-import { Icon, PageTitle, Wrapper } from '../../components/styles';
+import { BlackBoard } from './_component/black-board.component';
+import { PostTotalCount } from './_component/post-total-count.component';
+import { Container, Icon, PageTitle, Wrapper } from '../../components/styles';
 import { Styles } from '../../style/styles';
+import { ButtonWrapper } from './_component/button-wrapper.component';
+import { PostButton } from './_component/post-button.component';
 
 const ClassRoomPage = (): JSX.Element => {
+    const date = new Date();
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0, 0);
+    const theDate = new Date('2022/02/18');
+
+    /** D-day 표시 */
+    const theDay = (theDate.getTime() - date.getTime()) / (1000 * 60 * 60 * 24);
     return (
-        <Wrapper>
+        <Container>
             <Header back={false} title={'꽃길레터'} />
             <PageTitleWrapper>
                 <PageTitle sub>
@@ -18,51 +28,16 @@ const ClassRoomPage = (): JSX.Element => {
                     개의 마음이 전달되었어요!
                 </PageTitle>
             </PageTitleWrapper>
-            <BlackBoardWrapper>
-                <Icon src="/img/black-board.png" width="320px" height="200px" />
-                <Text>메세지 전달일</Text>
-                <BlackBoard dday={21} />
-            </BlackBoardWrapper>
+            <BlackBoard dday={theDay} />
             <MessageButtonWrapper>
-                <Icon
-                    src="/img/sm_bg.png"
-                    width="96px"
-                    height="112px"
-                    marginBottom="16px"
-                />
-                <Icon
-                    src="/img/sm_bg.png"
-                    width="96px"
-                    height="112px"
-                    marginBottom="16px"
-                />
-                <Icon
-                    src="/img/sm_bg.png"
-                    width="96px"
-                    height="112px"
-                    marginBottom="16px"
-                />
-                <Icon
-                    src="/img/sm_bg.png"
-                    width="96px"
-                    height="112px"
-                    marginBottom="16px"
-                />
-                <Icon
-                    src="/img/sm_bg.png"
-                    width="96px"
-                    height="112px"
-                    marginBottom="16px"
-                />
-                <Icon
-                    src="/img/sm_bg.png"
-                    width="96px"
-                    height="112px"
-                    marginBottom="16px"
-                />
+                <PostButton onRegister={() => null} />
+                <PostButton onClickPost={() => null} />
+                <PostButton onClickPost={() => null} />
+                <PostButton onClickPost={() => null} />
+                <PostButton onClickPost={() => null} />
+                <PostButton onClickPost={() => null} />
             </MessageButtonWrapper>
-            <Link to="/user-styling">메세지 쓰기</Link>
-        </Wrapper>
+        </Container>
     );
 };
 
@@ -81,7 +56,7 @@ const BlackBoardWrapper = styled.div`
 const Text = styled.span`
     position: absolute;
     display: flex;
-    top: calc(50% - 23px);
+    top: calc(50% - 30px);
     left: calc(50% - 50px);
     ${Styles.FONT.SUB_TEXT};
     color: ${Styles.COLOR.WHITE};
@@ -92,4 +67,5 @@ const MessageButtonWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     width: calc(100% - 40px);
+    margin-top: 30px;
 `;
