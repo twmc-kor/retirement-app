@@ -30,7 +30,7 @@ export const PostButton: FC<IPostButton> = ({
     const handleClick = () => {
         if (onRegister) {
             // 등록 페이지 전환
-            navigate('/user-styling');
+            navigate('/main/user-styling');
         }
         // 포스트 상세
     };
