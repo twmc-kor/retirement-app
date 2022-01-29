@@ -30,8 +30,9 @@ const OnboardingPage = (): JSX.Element => {
     const navigation = useNavigate();
 
     const handleEntrance = () => {
-        navigation('/class-room');
+        navigation('/main/class-room');
     };
+
     return (
         <Container>
             <Swiper
@@ -44,8 +45,7 @@ const OnboardingPage = (): JSX.Element => {
                 slidesPerView={1}
                 style={{
                     width: '280px',
-                    height: '500px',
-                    backgroundColor: 'yellowgreen',
+                    height: '480px',
                 }}
             >
                 {SWIPER_IMGS.map((item) => {

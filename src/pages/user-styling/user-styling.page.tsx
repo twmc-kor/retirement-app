@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Header } from '../../components';
-import { Wrapper } from '../../components/styles';
+import { Container, Icon, PageTitle, Text } from '../../components/styles';
+import { ImageButton } from './_component/image-button.component';
 
 const UserStylingPage = (): JSX.Element => {
     return (
-        <Wrapper>
-            <Header back title="꽃길레터" />
-            <Link to="/message">캐릭터</Link>
-        </Wrapper>
+        <Container>
+            <PageTitle>캐릭터를 선택해주세요</PageTitle>
+            {/* <Icon src={ImageTypeEnum['MALE_01']} width="96px" height="112px" /> */}
+            <ImageButton />
+            <Text>캐릭터를 선택하시면 자동으로</Text>
+            <Text>메세지 작성 화면으로 이동합니다.</Text>
+        </Container>
     );
 };
 

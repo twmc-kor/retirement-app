@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { Header } from '../../components';
 import { BlackBoard } from './_component/black-board.component';
@@ -20,7 +19,6 @@ const ClassRoomPage = (): JSX.Element => {
     const theDay = (theDate.getTime() - date.getTime()) / (1000 * 60 * 60 * 24);
     return (
         <Container>
-            <Header back={false} title={'꽃길레터'} />
             <PageTitleWrapper>
                 <PageTitle sub>
                     지금까지
