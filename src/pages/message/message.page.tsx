@@ -1,54 +1,138 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Header } from '../../components';
-import { Icon, PageTitle, Wrapper, Text } from '../../components/styles';
+import { Button } from '../../components/button.component';
+import { Modal } from '../../components/modal.component';
+import { PageTitle, Container, Text } from '../../components/styles';
 import { Styles } from '../../style/styles';
 
 const MessagePage = (): JSX.Element => {
+    const navigate = useNavigate();
+
+    const [message, setMessage] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [openModal, setOpenModal] = useState<boolean>(false);
+
+    const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setMessage(e.target.value);
+    };
+
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value);
+    };
+
+    const handleSaveButton = () => {
+        // Post작업
+        // const bodyData = {
+        //     nickname: name,
+        //     message: message,
+        //     imageType: '',
+        // }
+        // fetch('https://us-central1-enoveh-toy.cloudfunctions.net', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(bodyData),
+        // }).then((res) => res.json).then((json) => )
+        navigate('/loading');
+
+        // 1. 저장 누르면
+        // 2. loading 상태값 변화하면서..?
+        // 3. loading 중일 때 loading 이미지 띄우기
+        // 4. post 전송이 완료되면
+        // 5. class-room 페이지로 이동
+
+        /** 닉네임 중복체크 */
+        // if () {
+        //     return (
+        //         <Modal
+        //         iconUrl="/img/icon/alert_icon.svg"
+        //         close={closeModal}
+        //         visible={openModal}
+        //         bgColor="grey"
+        //         closeBtn="close"
+        //     >
+        //         이미 사용중인 닉네임입니다!
+        //     </Modal>
+        //     );
+        // }
+    };
+
+    const closeModal = () => {
+        console.log('have to close modal');
+        setOpenModal(false);
+    };
+
+    useEffect(() => {
+        console.log('open modal');
+        setOpenModal(true);
+    }, []);
+
     return (
-        <Wrapper>
-            <Header back title="꽃길레터" />
+        <Container>
+            <Modal
+                iconUrl="/img/alert_modal.svg"
+                close={closeModal}
+                visible={openModal}
+            />
             <PageTitle>메세지를 입력해주세요</PageTitle>
-            {/* <Icon src="/img/letter_bg.png" width="320px" height="501px" /> */}
             <LetterWrapper>
                 <Text noti>※ 메세지는 수신인만 볼수 있습니다! ※</Text>
-                <TextField placeholder="꽃길 응원하기" />
+                <TextField
+                    placeholder={`교장선생님!\n항상 꽃길만 걸으시길\n응원하겠습니다!`}
+                    value={message}
+                    onChange={handleMessageChange}
+                />
                 <UserNameWrapper>
                     닉네임:
-                    <UserNameInput placeholder="입력하기" />
+                    <UserNameInput
+                        placeholder="입력하기"
+                        value={name}
+                        onChange={handleNameChange}
+                        maxLength={6}
+                    />
                 </UserNameWrapper>
-                <SaveButton to="/loading">저장</SaveButton>
+                <Button
+                    onClick={handleSaveButton}
+                    title="저장"
+                    disabled={!message || !name}
+                />
             </LetterWrapper>
-        </Wrapper>
+        </Container>
     );
 };
 
 export default MessagePage;
 
 const LetterWrapper = styled.div`
-    z-index: 1;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 320px;
-    height: 501px;
-    /* position: absolute; */
-    background-image: url('/img/letter_bg.png');
+    height: 496px;
+    margin-top: 8px;
+    background-image: url('/img/letter_bg.svg');
 `;
 
 const TextField = styled.textarea`
-    width: 216px;
+    width: calc(216px - 16px);
     height: 208px;
     padding: 8px;
-    border: 1px dotted #b69b56;
+    border: 1px dashed #b69b56;
     border-radius: 10px;
     ${Styles.FONT.MESSAGE_TEXT};
-    color: ${Styles.COLOR.TEXT};
+    color: ${Styles.COLOR.MAIN_BUTTON};
     resize: none;
 
     &:focus {
         outline: none;
+    }
+
+    &::placeholder {
+        ${Styles.FONT.USER_NAME};
+        color: ${Styles.COLOR.TEXT};
     }
 `;
 
@@ -59,7 +143,7 @@ const UserNameWrapper = styled.div`
     height: 32px;
     padding: 0 20px;
     margin-top: 13px;
-    border: 1px dotted #b69b56;
+    border: 1px dashed #b69b56;
     border-radius: 5px;
     ${Styles.FONT.USER_NAME};
     color: ${Styles.COLOR.MAIN_TEXT};
@@ -82,19 +166,4 @@ const UserNameInput = styled.input`
         ${Styles.FONT.USER_NAME};
         color: ${Styles.COLOR.TEXT};
     }
-`;
-
-const SaveButton = styled(Link)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 168px;
-    height: 48px;
-    margin-top: 127px;
-    background-color: ${Styles.COLOR.MAIN_BUTTON};
-    color: ${Styles.COLOR.WHITE};
-    border-radius: 5px;
-    text-decoration: none;
-    ${Styles.FONT.SUB_TEXT};
-    letter-spacing: 5px;
 `;
