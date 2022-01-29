@@ -1,43 +1,64 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Styles } from '../style/styles';
 import { IDrawer } from './interface';
 import { DefaultButton, Icon } from './styles';
 
-/**
- * 헤더
- */
-export const Drawer: FC<IDrawer> = ({ open }) => {
-    const handleCloseDrawer = () => {};
+export const Drawer: FC<IDrawer> = ({ open, children, close }) => {
     return (
-        <Wrapper open={open}>
-            <IconWrapper onClick={handleCloseDrawer}>
-                <Icon src="/img/wt_close_btn.svg" />
-            </IconWrapper>
-            <Text></Text>
-            <ImgWrapper>
-                <Icon src="/img/makers.svg" width="135px" height="71" />
-            </ImgWrapper>
-        </Wrapper>
+        <>
+            <DrawerBg visible={open} />
+            <Wrapper visible={open}>
+                <IconWrapper onClick={close}>
+                    <Icon src="/img/icon/wt_close_btn.svg" />
+                </IconWrapper>
+                <Text>{children}</Text>
+                <ImgWrapper>
+                    <NameWrapper>
+                        <Name>은호</Name>
+                        <Name>은지</Name>
+                        <Name>혜서</Name>
+                    </NameWrapper>
+                    <Icon src="/img/makers.svg" width="135px" height="71" />
+                </ImgWrapper>
+            </Wrapper>
+        </>
     );
 };
 
-const Wrapper = styled.div<{ open?: boolean }>`
+const DrawerBgVisible = keyframes`
+  from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.5;
+    }
+`;
+
+const DrawerBg = styled.div<{ visible?: boolean }>`
+    z-index: 10;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    display: ${({ visible }) => (visible ? 'flex' : 'none')};
+    background-color: #4f4f4f;
+    opacity: 0.7;
+    align-items: center;
+    overflow: hidden;
+    animation: ${DrawerBgVisible} 0.3s;
+`;
+
+const Wrapper = styled.div<{ visible?: boolean }>`
     z-index: 100;
-    visibility: hidden;
     position: absolute;
     top: 0;
     right: 0;
+    display: ${({ visible }) => (visible ? 'flex' : 'none')};
     width: 167px;
     height: 640px;
     background-color: ${Styles.COLOR.HEADER};
-
-    ${({ open }) =>
-        open &&
-        css`
-            visibility: visible;
-        `}
 `;
 
 const IconWrapper = styled(DefaultButton)`
@@ -46,13 +67,26 @@ const IconWrapper = styled(DefaultButton)`
     right: 21px;
 `;
 
-const Text = styled.span`
+const Text = styled.div`
+    position: absolute;
+    top: 100px;
     ${Styles.FONT.TITLE_NAME};
     color: ${Styles.COLOR.WHITE};
 `;
 
 const ImgWrapper = styled.div`
     position: absolute;
-    bottom: 0;
+    bottom: -5px;
     right: 15px;
+`;
+
+const NameWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 0 15px;
+`;
+
+const Name = styled.span`
+    ${Styles.FONT.NOTI_TEXT};
+    color: ${Styles.COLOR.WHITE};
 `;
