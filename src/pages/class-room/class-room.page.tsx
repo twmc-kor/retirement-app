@@ -1,14 +1,12 @@
-import React, { FC, useState } from 'react';
-import styled, { css } from 'styled-components';
-import { Header } from '../../components';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { BlackBoard } from './_component/black-board.component';
 import { PostTotalCount } from './_component/post-total-count.component';
-import { Container, Icon, PageTitle, Wrapper } from '../../components/styles';
-import { Styles } from '../../style/styles';
-import { ButtonWrapper } from './_component/button-wrapper.component';
+import { Container, PageTitle } from '../../components/styles';
 import { PostButton } from './_component/post-button.component';
 
 const ClassRoomPage = (): JSX.Element => {
+    const [messageCount, setMessageCount] = useState<number>(0);
     const date = new Date();
     date.setHours(0);
     date.setMinutes(0);
@@ -17,12 +15,21 @@ const ClassRoomPage = (): JSX.Element => {
 
     /** D-day 표시 */
     const theDay = (theDate.getTime() - date.getTime()) / (1000 * 60 * 60 * 24);
+
+    useEffect(() => {
+        fetch('https://us-central1-enoveh-toy.cloudfunctions.net')
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.success) console.log('받아온 데이터는');
+                // setMessageCount(data.length);
+            });
+    }, []);
     return (
         <Container>
             <PageTitleWrapper>
                 <PageTitle sub>
                     지금까지
-                    <PostTotalCount count={22} />
+                    <PostTotalCount count={messageCount} />
                     개의 마음이 전달되었어요!
                 </PageTitle>
             </PageTitleWrapper>
@@ -45,19 +52,6 @@ const PageTitleWrapper = styled.div`
     display: flex;
     justify-content: flex-start;
     width: 100%;
-`;
-
-const BlackBoardWrapper = styled.div`
-    position: relative;
-`;
-
-const Text = styled.span`
-    position: absolute;
-    display: flex;
-    top: calc(50% - 30px);
-    left: calc(50% - 50px);
-    ${Styles.FONT.SUB_TEXT};
-    color: ${Styles.COLOR.WHITE};
 `;
 
 const MessageButtonWrapper = styled.div`
