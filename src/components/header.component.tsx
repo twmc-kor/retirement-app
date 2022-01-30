@@ -1,17 +1,14 @@
 import React, { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Styles } from '../style/styles';
 import { Drawer } from './drawer.component';
 import { IHeader } from './interface';
-import { DefaultButton, Icon } from './styles';
+import { DefaultButton, Icon, Text } from './styles';
 
-/**
- * 헤더
- */
-export const Header: FC<IHeader> = ({ back = true, title }) => {
+export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) => {
     const navigate = useNavigate();
+    const { pathname } = useLocation();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const handleGoBack = () => {
@@ -22,16 +19,24 @@ export const Header: FC<IHeader> = ({ back = true, title }) => {
         setIsDrawerOpen(true);
     };
 
+    const handleCloseDrawer = () => {
+        setIsDrawerOpen(false);
+    };
+
     return (
         <Wrapper>
             <IconWrapper left="20px" onClick={handleGoBack}>
-                {back && <Icon src="/img/back_btn.png" />}
+                {pathname !== '/main/class-room' && back && (
+                    <Icon src="/img/icon/back_btn.svg" />
+                )}
             </IconWrapper>
             <Title>{title}</Title>
             <IconWrapper right="20px" onClick={handleOpenDrawer}>
-                <Icon src="/img/menu_btn.png" />
+                <Icon src="/img/icon/menu_btn.svg" />
             </IconWrapper>
-            <Drawer open={isDrawerOpen} />
+            <Drawer open={isDrawerOpen} close={handleCloseDrawer}>
+                이 프로젝트는 은호,혜서,은지의 협업의 결과물입니다.
+            </Drawer>
         </Wrapper>
     );
 };
