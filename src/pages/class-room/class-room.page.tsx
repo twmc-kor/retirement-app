@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { BlackBoard } from './_component/black-board.component';
 import { PostTotalCount } from './_component/post-total-count.component';
 import { Container, PageTitle } from '../../components/styles';
-import { PostButton } from './_component/post-button.component';
+import { IPost } from '../../models';
+import { PostList } from './_component/post-list.component';
+import Indicator from '../../components/indicator.component';
 
 const ClassRoomPage = (): JSX.Element => {
-    const [messageCount, setMessageCount] = useState<number>(0);
+    const [posts, setPosts] = useState<IPost[]>([]);
+
+    const [loading, setLoading] = useState(true);
+
+    const messageCount = useMemo(() => posts.length, [posts]);
+
     const date = new Date();
     date.setHours(0);
     date.setMinutes(0);
@@ -16,14 +23,26 @@ const ClassRoomPage = (): JSX.Element => {
     /** D-day 표시 */
     const theDay = (theDate.getTime() - date.getTime()) / (1000 * 60 * 60 * 24);
 
+    const renderEmptyState = () => {
+        return (
+            <EmptyStateWrapper>
+                <Indicator />
+            </EmptyStateWrapper>
+        );
+    };
+
     useEffect(() => {
-        fetch('https://us-central1-enoveh-toy.cloudfunctions.net')
+        fetch('https://us-central1-enoveh-toy.cloudfunctions.net/posts')
             .then((res) => res.json())
-            .then((res) => {
-                if (res.success) console.log('받아온 데이터는');
-                // setMessageCount(data.length);
+            .then((json) => {
+                const { posts } = json;
+                if (posts) {
+                    setPosts(posts);
+                    setLoading(false);
+                }
             });
     }, []);
+
     return (
         <Container>
             <PageTitleWrapper>
@@ -34,14 +53,7 @@ const ClassRoomPage = (): JSX.Element => {
                 </PageTitle>
             </PageTitleWrapper>
             <BlackBoard dday={theDay} />
-            <MessageButtonWrapper>
-                <PostButton onRegister={() => null} />
-                <PostButton onClickPost={() => null} />
-                <PostButton onClickPost={() => null} />
-                <PostButton onClickPost={() => null} />
-                <PostButton onClickPost={() => null} />
-                <PostButton onClickPost={() => null} />
-            </MessageButtonWrapper>
+            {loading ? renderEmptyState() : <PostList posts={posts} />}
         </Container>
     );
 };
@@ -54,10 +66,6 @@ const PageTitleWrapper = styled.div`
     width: 100%;
 `;
 
-const MessageButtonWrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: calc(100% - 40px);
-    margin-top: 30px;
+const EmptyStateWrapper = styled.div`
+    padding: 30px;
 `;
