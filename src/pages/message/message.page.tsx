@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../../components/button.component';
@@ -8,10 +9,14 @@ import { Styles } from '../../style/styles';
 
 const MessagePage = (): JSX.Element => {
     const navigate = useNavigate();
+    const params = useParams();
 
     const [message, setMessage] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [openModal, setOpenModal] = useState<boolean>(false);
+
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
 
     const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMessage(e.target.value);
@@ -22,50 +27,43 @@ const MessagePage = (): JSX.Element => {
     };
 
     const handleSaveButton = () => {
+        setLoading(true);
+        if (!params.imageType) {
+            return console.error('올바르지 않은 접근입니다.');
+        }
         // Post작업
         const bodyData = {
             nickname: name,
             message: message,
-            imageType: '',
+            imageType: params.imageType,
         };
-        fetch('https://us-central1-enoveh-toy.cloudfunctions.net', {
+        fetch('https://us-central1-enoveh-toy.cloudfunctions.net/addPost', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(bodyData),
         })
-            .then((res) => res.json)
-            .then((json) => console.log(json));
+            .then((res) => res.json())
+            .then((json) => {
+                if (json.error) {
+                    return setError(true);
+                }
 
-        // loading page로 이동
-        navigate('/loading');
-
-        // 1. 저장 누르면
-        // 2. loading 상태값 변화하면서..?
-        // 3. loading 중일 때 loading 이미지 띄우기
-        // 4. post 전송이 완료되면
-        // 5. class-room 페이지로 이동
-
-        /** 닉네임 중복체크 */
-        // if () {
-        //     return (
-        //         <Modal
-        //         iconUrl="/img/icon/alert_icon.svg"
-        //         close={closeModal}
-        //         visible={openModal}
-        //         bgColor="grey"
-        //         closeBtn="close"
-        //     >
-        //         이미 사용중인 닉네임입니다!
-        //     </Modal>
-        //     );
-        // }
+                // loading page로 이동
+                navigate('/loading');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     const closeModal = () => {
         console.log('have to close modal');
         setOpenModal(false);
+    };
+    const closeErrorModal = () => {
+        setError(false);
     };
 
     useEffect(() => {
@@ -75,11 +73,6 @@ const MessagePage = (): JSX.Element => {
 
     return (
         <Container>
-            <Modal
-                iconUrl="/img/alert_modal.svg"
-                close={closeModal}
-                visible={openModal}
-            />
             <PageTitle>메세지를 입력해주세요</PageTitle>
             <LetterWrapper>
                 <Text noti>※ 메세지는 수신인만 볼수 있습니다! ※</Text>
@@ -101,9 +94,25 @@ const MessagePage = (): JSX.Element => {
                 <Button
                     onClick={handleSaveButton}
                     title="저장"
-                    disabled={!message || !name}
+                    disabled={!message || !name || loading}
+                    loading={loading}
                 />
             </LetterWrapper>
+            {/* 모달 영역 */}
+            <Modal
+                iconUrl="/img/alert_modal.svg"
+                close={closeModal}
+                visible={openModal}
+            />
+            <Modal
+                iconUrl="/img/icon/alert_icon.svg"
+                close={closeErrorModal}
+                visible={error}
+                bgColor="grey"
+                closeBtn="close"
+            >
+                이미 사용중인 닉네임입니다!
+            </Modal>
         </Container>
     );
 };
