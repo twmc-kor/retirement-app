@@ -51,7 +51,7 @@ const DrawerBg = styled.div<{ visible?: boolean }>`
 `;
 
 const Wrapper = styled.div<{ visible?: boolean }>`
-    z-index: 100;
+    z-index: 50;
     position: absolute;
     top: 0;
     right: 0;
@@ -59,6 +59,7 @@ const Wrapper = styled.div<{ visible?: boolean }>`
     width: 167px;
     height: 640px;
     background-color: ${Styles.COLOR.HEADER};
+    transition: all 2s;
 `;
 
 const IconWrapper = styled(DefaultButton)`
@@ -70,6 +71,7 @@ const IconWrapper = styled(DefaultButton)`
 const Text = styled.div`
     position: absolute;
     top: 100px;
+    padding: 0 20px;
     ${Styles.FONT.TITLE_NAME};
     color: ${Styles.COLOR.WHITE};
 `;
