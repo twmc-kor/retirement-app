@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Styles } from '../../../style/styles';
 import { ImageTypeEnum, IPostButton } from '../../../components/interface';
-import { DefaultButton, Icon, Wrapper } from '../../../components/styles';
+import { DefaultButton, Icon } from '../../../components/styles';
 import { useNavigate } from 'react-router-dom';
+import { Modal } from '../../../components';
 
 const imageMap = {
     [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
@@ -17,9 +18,6 @@ const imageMap = {
     [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
 } as const;
 
-/**
- * 헤더
- */
 export const PostButton: FC<IPostButton> = ({
     post,
     onClickPost,
@@ -27,10 +25,14 @@ export const PostButton: FC<IPostButton> = ({
 }) => {
     const navigate = useNavigate();
 
+    const [openModal, setOpenModal] = useState<boolean>(false);
+
     const handleClick = () => {
         if (onRegister) {
             // 등록 페이지 전환
             navigate('/main/user-styling');
+        } else if (post) {
+            setOpenModal(true);
         }
         // 포스트 상세
     };
@@ -54,18 +56,29 @@ export const PostButton: FC<IPostButton> = ({
         }
         if (post) {
             return (
-                <Icon
-                    // src={imageMap[ImageTypeEnum]}
-                    width="96px"
-                    height="112px"
-                />
+                <>
+                    <Modal
+                        iconUrl="/img/icon/alert_icon.svg"
+                        close={() => setOpenModal(false)}
+                        visible={openModal}
+                        bgColor="grey"
+                        closeBtn="close"
+                    />
+                    <Icon
+                        // src={imageMap[ImageTypeEnum]}
+                        width="96px"
+                        height="112px"
+                    />
+                </>
             );
         }
         return <Icon src="/img/smile_bg.svg" width="96px" height="112px" />;
     };
 
     return (
-        <ButtonWrapper onClick={handleClick}>{renderComponent()}</ButtonWrapper>
+        <ButtonWrapper onClick={handleClick} hasNothing={!onRegister || !post}>
+            {renderComponent()}
+        </ButtonWrapper>
     );
 };
 
@@ -73,13 +86,18 @@ type IconWrapperType = {
     top?: string;
     left?: string;
     right?: string;
+    hasNothing?: boolean;
 };
-
-//grid로 변경해야 함
 
 const ButtonWrapper = styled(DefaultButton)<IconWrapperType>`
     margin-bottom: 16px;
     cursor: pointer;
+
+    /* ${({ hasNothing }) =>
+        hasNothing &&
+        css`
+            pointer-events: none;
+        `} */
 `;
 
 const IconWrapper = styled(DefaultButton)`
