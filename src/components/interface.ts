@@ -27,37 +27,33 @@ export interface IBlackBoard {
  * 게시물 버튼
  */
 export interface IPostButton {
-    /**
-     * register: 등록 버튼
-     * content: 컨텐츠가 포함된 버튼
-     * placeholder: 비어있는 버튼
-     */
-    variant: 'register' | 'content' | 'placeholder';
     /** 포스트 데이터 */
-    post: IPost;
+    post?: IPost;
     /** 클릭 핸들러 */
-    onClick: (id: IPost['id']) => void;
+    onClickPost?: (id: IPost['id']) => void;
+    /** 등록 핸들러 */
+    onRegister?: () => void;
 }
 /**
  * 이미지 타입
  */
 export enum ImageTypeEnum {
-    MALE_01 = 'MALE_01',
-    MALE_02 = 'MALE_02',
-    MALE_03 = 'MALE_03',
-    MALE_04 = 'MALE_04',
-    FEMALE_01 = 'FEMALE_01',
-    FEMALE_02 = 'FEMALE_02',
-    FEMALE_03 = 'FEMALE_03',
-    FEMALE_04 = 'FEMALE_04',
-    FEMALE_05 = 'FEMALE_05',
+    MALE_01 = '/img/user-type/MALE_01.svg',
+    MALE_02 = '/img/user-type/MALE_02.svg',
+    MALE_03 = '/img/user-type/MALE_03.svg',
+    MALE_04 = '/img/user-type/MALE_04.svg',
+    FEMALE_01 = '/img/user-type/FEMALE_01.svg',
+    FEMALE_02 = '/img/user-type/FEMALE_02.svg',
+    FEMALE_03 = '/img/user-type/FEMALE_03.svg',
+    FEMALE_04 = '/img/user-type/FEMALE_04.svg',
+    FEMALE_05 = '/img/user-type/FEMALE_05.svg',
 }
 /**
  * 이미지 버튼
  */
 export interface IImageButton {
     /** 이미지 타입 */
-    type: IPost['imageType'];
+    // type: IPost['imageType'];
     /** 클릭 핸들러 */
     onClick: (type: IPost['imageType']) => void;
 }
@@ -94,7 +90,12 @@ export interface IButton {
  */
 export interface IModal {
     /** 메세지 */
-    message: string;
+    iconUrl: string;
+    close: () => void;
+    visible: boolean;
+    bgColor?: string;
+    closeBtn?: string;
+    children?: string;
 }
 /**
  * Drawer
@@ -102,6 +103,8 @@ export interface IModal {
 export interface IDrawer {
     /** 열기 여부 */
     open: boolean;
+    close: () => void;
+
     /** 하위 컴포넌트 */
-    children: JSX.Element;
+    children: string;
 }
