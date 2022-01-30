@@ -1,14 +1,19 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 import { Header } from '../../components';
 
 const MainPage = (): JSX.Element => {
     return (
-        <div>
+        <MainWrapper>
             <Header back title="꽃길 레터" />
             <Outlet />
-        </div>
+        </MainWrapper>
     );
 };
 
 export default MainPage;
+
+const MainWrapper = styled.div`
+    width: 360px;
+`;
