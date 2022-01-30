@@ -23,18 +23,22 @@ const MessagePage = (): JSX.Element => {
 
     const handleSaveButton = () => {
         // Post작업
-        // const bodyData = {
-        //     nickname: name,
-        //     message: message,
-        //     imageType: '',
-        // }
-        // fetch('https://us-central1-enoveh-toy.cloudfunctions.net', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(bodyData),
-        // }).then((res) => res.json).then((json) => )
+        const bodyData = {
+            nickname: name,
+            message: message,
+            imageType: '',
+        };
+        fetch('https://us-central1-enoveh-toy.cloudfunctions.net', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bodyData),
+        })
+            .then((res) => res.json)
+            .then((json) => console.log(json));
+
+        // loading page로 이동
         navigate('/loading');
 
         // 1. 저장 누르면
@@ -83,6 +87,7 @@ const MessagePage = (): JSX.Element => {
                     placeholder={`교장선생님!\n항상 꽃길만 걸으시길\n응원하겠습니다!`}
                     value={message}
                     onChange={handleMessageChange}
+                    autoFocus
                 />
                 <UserNameWrapper>
                     닉네임:
@@ -156,7 +161,7 @@ const UserNameInput = styled.input`
     margin-left: 17px;
     border: none;
     ${Styles.FONT.USER_NAME};
-    color: ${Styles.COLOR.TEXT};
+    color: ${Styles.COLOR.MAIN_BUTTON};
 
     &:focus {
         outline: none;
