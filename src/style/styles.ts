@@ -88,7 +88,7 @@ export const Styles: IStyles = {
         MAIN_BUTTON: '#834E00',
         SUB_BUTTON: '#88ADFF',
         NOTI: '#48BD70',
-        TEXT: '#8A8A8A',
+        TEXT: '#BFBFBF',
         WHITE: '#ffffff',
     },
 };
