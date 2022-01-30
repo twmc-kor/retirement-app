@@ -1,75 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../../components/button.component';
 import { Modal } from '../../components/modal.component';
 import { PageTitle, Container, Text } from '../../components/styles';
+import { AddPostInputName, useAddPost } from '../../hooks/useFetch.hook';
 import { Styles } from '../../style/styles';
 
 const MessagePage = (): JSX.Element => {
     const navigate = useNavigate();
     const params = useParams();
 
-    const [message, setMessage] = useState<string>('');
-    const [name, setName] = useState<string>('');
-    const [openModal, setOpenModal] = useState<boolean>(false);
+    const [openModal, setOpenModal] = useState<boolean>(true);
 
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<boolean>(false);
-
-    const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setMessage(e.target.value);
-    };
-
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value);
-    };
-
-    const handleSaveButton = () => {
-        setLoading(true);
-        if (!params.imageType) {
-            return console.error('올바르지 않은 접근입니다.');
-        }
-        // Post작업
-        const bodyData = {
-            nickname: name,
-            message: message,
-            imageType: params.imageType,
-        };
-        fetch('https://us-central1-enoveh-toy.cloudfunctions.net/addPost', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(bodyData),
-        })
-            .then((res) => res.json())
-            .then((json) => {
-                if (json.error) {
-                    return setError(true);
-                }
-
-                // loading page로 이동
-                navigate('/loading');
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
+    const {
+        message,
+        nickname,
+        loading,
+        error,
+        clearError,
+        commit,
+        handleChangeText,
+    } = useAddPost(params.imageType as string);
 
     const closeModal = () => {
         console.log('have to close modal');
         setOpenModal(false);
     };
     const closeErrorModal = () => {
-        setError(false);
+        clearError();
     };
 
-    useEffect(() => {
-        console.log('open modal');
-        setOpenModal(true);
-    }, []);
+    const handleSubmit = () => {
+        commit().then(() => navigate('/loading'));
+    };
 
     return (
         <Container>
@@ -78,23 +43,25 @@ const MessagePage = (): JSX.Element => {
                 <Text noti>※ 메세지는 수신인만 볼수 있습니다! ※</Text>
                 <TextField
                     placeholder={`교장선생님!\n항상 꽃길만 걸으시길\n응원하겠습니다!`}
+                    name={AddPostInputName.MESSAGE}
                     value={message}
-                    onChange={handleMessageChange}
+                    onChange={handleChangeText}
                     autoFocus
                 />
                 <UserNameWrapper>
                     닉네임:
                     <UserNameInput
                         placeholder="입력하기"
-                        value={name}
-                        onChange={handleNameChange}
+                        name={AddPostInputName.NICKNAME}
+                        value={nickname}
+                        onChange={handleChangeText}
                         maxLength={6}
                     />
                 </UserNameWrapper>
                 <Button
-                    onClick={handleSaveButton}
+                    onClick={handleSubmit}
                     title="저장"
-                    disabled={!message || !name || loading}
+                    disabled={!message || !nickname || loading}
                     loading={loading}
                 />
             </LetterWrapper>

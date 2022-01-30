@@ -6,11 +6,14 @@ import { Container, PageTitle } from '../../components/styles';
 import { IPost } from '../../models';
 import { PostList } from './_component/post-list.component';
 import Indicator from '../../components/indicator.component';
+import { useFetchPosts } from '../../hooks/useFetch.hook';
 
 const ClassRoomPage = (): JSX.Element => {
-    const [posts, setPosts] = useState<IPost[]>([]);
-
-    const [loading, setLoading] = useState(true);
+    /**
+     * 게시물 패치 훅
+     * 마운트 시 패치 작동
+     */
+    const [posts, loading] = useFetchPosts();
 
     const messageCount = useMemo(() => posts.length, [posts]);
 
@@ -30,18 +33,6 @@ const ClassRoomPage = (): JSX.Element => {
             </EmptyStateWrapper>
         );
     };
-
-    useEffect(() => {
-        fetch('https://us-central1-enoveh-toy.cloudfunctions.net/posts')
-            .then((res) => res.json())
-            .then((json) => {
-                const { posts } = json;
-                if (posts) {
-                    setPosts(posts);
-                    setLoading(false);
-                }
-            });
-    }, []);
 
     return (
         <Container>
