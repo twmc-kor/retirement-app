@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { IImageButton, ImageTypeEnum } from '../../../components/interface';
+import { ImageTypeEnum } from '../../../components/interface';
 import { DefaultButton, Icon, Wrapper } from '../../../components/styles';
 
 export const ImageButton: FC = () => {
