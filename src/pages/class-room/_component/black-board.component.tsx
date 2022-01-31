@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import { Styles } from '../../../style/styles';
 import { IBlackBoard } from '../../../components/interface';
-import { Icon } from '../../../components/styles';
 
 /**
  * 칠판

@@ -7,7 +7,8 @@ const LoadingPage = (): JSX.Element => {
 
     useEffect(() => {
         setTimeout(() => navigate('/main/class-room'), 3000);
-    }, []);
+    });
+
     return <Icon src="/img/loading_img.svg" width="100%" height="100%" />;
 };
 

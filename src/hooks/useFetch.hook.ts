@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ImageTypeEnum } from '../components/interface';
 import { IPost } from '../models';
 
 const baseUrl = 'https://us-central1-enoveh-toy.cloudfunctions.net';

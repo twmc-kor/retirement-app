@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { BlackBoard } from './_component/black-board.component';
 import { PostTotalCount } from './_component/post-total-count.component';
 import { Container, PageTitle } from '../../components/styles';
-import { IPost } from '../../models';
 import { PostList } from './_component/post-list.component';
 import Indicator from '../../components/indicator.component';
 import { useFetchPosts } from '../../hooks/useFetch.hook';

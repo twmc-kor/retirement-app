@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Icon, PageTitle, Text } from '../../components/styles';
+import { Container, PageTitle, Text } from '../../components/styles';
 import { ImageButton } from './_component/image-button.component';
 
 const UserStylingPage = (): JSX.Element => {

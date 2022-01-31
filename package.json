@@ -30,7 +30,9 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "prettier": "prettier -w src"
+        "prettier": "prettier -w src",
+        "preci": "rm -rf node_modules",
+        "ci": "yarn install --frozen-lockfile"
     },
     "eslintConfig": {
         "extends": [
