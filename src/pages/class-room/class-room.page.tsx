@@ -6,7 +6,7 @@ import { Container, PageTitle } from '../../components/styles';
 import { PostButton } from './_component/post-button.component';
 
 const ClassRoomPage = (): JSX.Element => {
-    const [messageCount, setMessageCount] = useState<number>(0);
+    const [messageCount] = useState<number>(0);
     const date = new Date();
     date.setHours(0);
     date.setMinutes(0);

@@ -1,22 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Styles } from '../../../style/styles';
-import { ImageTypeEnum, IPostButton } from '../../../components/interface';
+import { IPostButton } from '../../../components/interface';
 import { DefaultButton, Icon } from '../../../components/styles';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../../../components';
-
-const imageMap = {
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-    [ImageTypeEnum.FEMALE_01]: '/img/user-type/male_01.svg',
-} as const;
 
 export const PostButton: FC<IPostButton> = ({
     post,
