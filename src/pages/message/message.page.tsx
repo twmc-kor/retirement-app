@@ -1,109 +1,85 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../../components/button.component';
 import { Modal } from '../../components/modal.component';
 import { PageTitle, Container, Text } from '../../components/styles';
+import { AddPostInputName, useAddPost } from '../../hooks/useFetch.hook';
 import { Styles } from '../../style/styles';
 
 const MessagePage = (): JSX.Element => {
     const navigate = useNavigate();
+    const params = useParams();
 
-    const [message, setMessage] = useState<string>('');
-    const [name, setName] = useState<string>('');
-    const [openModal, setOpenModal] = useState<boolean>(false);
+    const [openModal, setOpenModal] = useState<boolean>(true);
 
-    const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setMessage(e.target.value);
-    };
-
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value);
-    };
-
-    const handleSaveButton = () => {
-        // Post작업
-        const bodyData = {
-            nickname: name,
-            message: message,
-            imageType: '',
-        };
-        fetch('https://us-central1-enoveh-toy.cloudfunctions.net', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(bodyData),
-        })
-            .then((res) => res.json)
-            .then((json) => console.log(json));
-
-        // loading page로 이동
-        navigate('/loading');
-
-        // 1. 저장 누르면
-        // 2. loading 상태값 변화하면서..?
-        // 3. loading 중일 때 loading 이미지 띄우기
-        // 4. post 전송이 완료되면
-        // 5. class-room 페이지로 이동
-
-        /** 닉네임 중복체크 */
-        // if () {
-        //     return (
-        //         <Modal
-        //         iconUrl="/img/icon/alert_icon.svg"
-        //         close={closeModal}
-        //         visible={openModal}
-        //         bgColor="grey"
-        //         closeBtn="close"
-        //     >
-        //         이미 사용중인 닉네임입니다!
-        //     </Modal>
-        //     );
-        // }
-    };
+    const {
+        message,
+        nickname,
+        loading,
+        error,
+        clearError,
+        commit,
+        handleChangeText,
+    } = useAddPost(params.imageType as string);
 
     const closeModal = () => {
         console.log('have to close modal');
         setOpenModal(false);
     };
+    const closeErrorModal = () => {
+        clearError();
+    };
 
-    useEffect(() => {
-        console.log('open modal');
-        setOpenModal(true);
-    }, []);
+    const handleSubmit = () => {
+        commit().then(() => navigate('/loading'));
+    };
 
     return (
         <Container>
-            <Modal
-                iconUrl="/img/alert_modal.svg"
-                close={closeModal}
-                visible={openModal}
-            />
             <PageTitle>메세지를 입력해주세요</PageTitle>
             <LetterWrapper>
                 <Text noti>※ 메세지는 수신인만 볼수 있습니다! ※</Text>
                 <TextField
                     placeholder={`교장선생님!\n항상 꽃길만 걸으시길\n응원하겠습니다!`}
+                    name={AddPostInputName.MESSAGE}
                     value={message}
-                    onChange={handleMessageChange}
+                    onChange={handleChangeText}
                     autoFocus
                 />
                 <UserNameWrapper>
                     닉네임:
                     <UserNameInput
                         placeholder="입력하기"
-                        value={name}
-                        onChange={handleNameChange}
+                        name={AddPostInputName.NICKNAME}
+                        value={nickname}
+                        onChange={handleChangeText}
                         maxLength={6}
                     />
                 </UserNameWrapper>
                 <Button
-                    onClick={handleSaveButton}
+                    onClick={handleSubmit}
                     title="저장"
-                    disabled={!message || !name}
+                    disabled={!message || !nickname || loading}
+                    loading={loading}
                 />
             </LetterWrapper>
+            {/* 모달 영역 */}
+            <Modal
+                iconUrl="/img/alert_modal.svg"
+                close={closeModal}
+                visible={openModal}
+            />
+            <Modal
+                iconUrl="/img/icon/alert_icon.svg"
+                close={closeErrorModal}
+                visible={error}
+                bgColor="grey"
+                closeBtn="close"
+            >
+                이미 사용중인 닉네임입니다!
+            </Modal>
         </Container>
     );
 };

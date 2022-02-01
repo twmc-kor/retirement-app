@@ -21,7 +21,10 @@ const MainApp = (): JSX.Element => {
                 <Route path="main" element={<MainPage />}>
                     <Route path="class-room" element={<ClassRoomPage />} />
                     <Route path="user-styling" element={<UserStylingPage />} />
-                    <Route path="message" element={<MessagePage />} />
+                    <Route
+                        path="message/:imageType"
+                        element={<MessagePage />}
+                    />
                 </Route>
                 <Route element={<NotFoundPage />} />
             </Routes>

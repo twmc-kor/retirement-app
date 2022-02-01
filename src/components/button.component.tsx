@@ -1,13 +1,19 @@
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import { Styles } from '../style/styles';
+import Indicator from './indicator.component';
 import { IButton } from './interface';
 import { DefaultButton } from './styles';
 
-export const Button: FC<IButton> = ({ title, onClick, disabled }) => {
+export const Button: FC<IButton> = ({
+    title,
+    onClick,
+    disabled,
+    loading = false,
+}) => {
     return (
         <ButtonContainer onClick={onClick} disabled={disabled}>
-            {title}
+            {loading ? <Indicator /> : title}
         </ButtonContainer>
     );
 };

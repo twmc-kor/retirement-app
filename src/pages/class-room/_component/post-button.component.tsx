@@ -6,11 +6,7 @@ import { DefaultButton, Icon } from '../../../components/styles';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../../../components';
 
-export const PostButton: FC<IPostButton> = ({
-    post,
-    onClickPost,
-    onRegister,
-}) => {
+export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
     const navigate = useNavigate();
 
     const [openModal, setOpenModal] = useState<boolean>(false);
@@ -18,11 +14,12 @@ export const PostButton: FC<IPostButton> = ({
     const handleClick = () => {
         if (onRegister) {
             // 등록 페이지 전환
-            navigate('/main/user-styling');
-        } else if (post) {
-            setOpenModal(true);
+            return navigate('/main/user-styling');
         }
-        // 포스트 상세
+        if (post) {
+            // TODO: 추후 게시물 오픈해야 되는 경우 modal 함수 제거 후 상세페이지 연결: remote config?
+            return setOpenModal(true);
+        }
     };
 
     const renderComponent = () => {
@@ -44,29 +41,54 @@ export const PostButton: FC<IPostButton> = ({
         }
         if (post) {
             return (
-                <>
-                    <Modal
-                        iconUrl="/img/icon/alert_icon.svg"
-                        close={() => setOpenModal(false)}
-                        visible={openModal}
-                        bgColor="grey"
-                        closeBtn="close"
-                    />
+                <div style={{ position: 'relative' }}>
                     <Icon
-                        // src={imageMap[ImageTypeEnum]}
+                        src={`/img/user-type/${post.imageType}.svg`}
                         width="96px"
                         height="112px"
                     />
-                </>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            background: 'rgba(0,0,0,0.5)',
+                            paddingTop: 8,
+                            paddingBottom: 8,
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontSize: 16,
+                                color: 'white',
+                            }}
+                        >
+                            {post.nickname}
+                        </Text>
+                    </div>
+                </div>
             );
         }
         return <Icon src="/img/smile_bg.svg" width="96px" height="112px" />;
     };
 
     return (
-        <ButtonWrapper onClick={handleClick} hasNothing={!onRegister || !post}>
-            {renderComponent()}
-        </ButtonWrapper>
+        <>
+            <ButtonWrapper
+                onClick={handleClick}
+                hasNothing={!onRegister || !post}
+            >
+                {renderComponent()}
+            </ButtonWrapper>
+            <Modal
+                iconUrl="/img/icon/alert_icon.svg"
+                close={() => setOpenModal(false)}
+                visible={openModal}
+                bgColor="grey"
+                closeBtn="close"
+            />
+        </>
     );
 };
 
