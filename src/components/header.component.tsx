@@ -47,7 +47,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 360px;
+    width: 100%;
     height: 56px;
     background-color: ${Styles.COLOR.HEADER};
 `;
@@ -67,4 +67,5 @@ const IconWrapper = styled(DefaultButton)<{
 const Title = styled.span`
     ${Styles.FONT.TITLE_NAME};
     color: ${Styles.COLOR.WHITE};
+    cursor: default;
 `;

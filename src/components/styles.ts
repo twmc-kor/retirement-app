@@ -8,12 +8,18 @@ type IconType = {
     marginTop?: string;
 };
 
+export const IndexContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const Container = styled.div<{ hasHeader?: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 360px;
     margin-top: ${({ hasHeader }) => (hasHeader ? '0' : '56px')};
 
     ${({ hasHeader }) =>
@@ -27,7 +33,6 @@ export const Wrapper = styled.div<{ margin?: string; button?: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* width: 360px; */
     margin: ${({ margin }) => (margin ? margin : '0px')};
 
     ${({ button }) =>

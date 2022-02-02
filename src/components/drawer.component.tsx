@@ -74,6 +74,7 @@ const Text = styled.div`
     padding: 0 20px;
     ${Styles.FONT.TITLE_NAME};
     color: ${Styles.COLOR.WHITE};
+    cursor: default;
 `;
 
 const ImgWrapper = styled.div`
@@ -91,4 +92,5 @@ const NameWrapper = styled.div`
 const Name = styled.span`
     ${Styles.FONT.NOTI_TEXT};
     color: ${Styles.COLOR.WHITE};
+    cursor: default;
 `;
