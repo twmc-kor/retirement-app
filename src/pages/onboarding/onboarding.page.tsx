@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { Container, DefaultButton, Icon } from '../../components/styles';
+import { DefaultButton, Icon, IndexContainer } from '../../components/styles';
 import { Styles } from '../../style/styles';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,11 +10,26 @@ import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/swiper.min.css';
 
 const SWIPER_IMGS = [
-    '/img/onboarding/guide_1.svg',
-    '/img/onboarding/guide_2.svg',
-    '/img/onboarding/guide_3.svg',
-    '/img/onboarding/guide_4.svg',
-    '/img/onboarding/guide_5.svg',
+    {
+        bg_img: '/img/onboarding/obd_bg1.svg',
+        img: '/img/onboarding/obd_elmt1.svg',
+    },
+    {
+        bg_img: '/img/onboarding/obd_bg2.svg',
+        img: '/img/onboarding/obd_elmt2.svg',
+    },
+    {
+        bg_img: '/img/onboarding/obd_bg3.svg',
+        img: '/img/onboarding/obd_elmt3.svg',
+    },
+    {
+        bg_img: '/img/onboarding/obd_bg4.svg',
+        img: '/img/onboarding/obd_elmt4.svg',
+    },
+    {
+        bg_img: '/img/onboarding/obd_bg5.svg',
+        img: '/img/onboarding/obd_elmt5.svg',
+    },
 ];
 
 const OnboardingPage = (): JSX.Element => {
@@ -22,14 +37,12 @@ const OnboardingPage = (): JSX.Element => {
 
     const navigation = useNavigate();
 
-    const [showButton, setShowButton] = useState(false);
-
     const handleEntrance = () => {
         navigation('/main/class-room');
     };
 
     return (
-        <Container hasHeader>
+        <IndexContainer>
             <Swiper
                 pagination={{
                     clickable: true,
@@ -38,30 +51,30 @@ const OnboardingPage = (): JSX.Element => {
                 autoplay={{ delay: 2500, stopOnLastSlide: true }}
                 spaceBetween={50}
                 slidesPerView={1}
-                onReachEnd={() => setShowButton(true)}
                 style={{
-                    width: '360px',
-                    height: '640px',
+                    width: '415px',
+                    // height: '640px',
+                    position: 'relative',
                 }}
             >
-                {SWIPER_IMGS.map((_, index) => {
+                {SWIPER_IMGS.map((item, index) => {
                     return (
                         <SwiperSlide key={`onboarding-slide-${index}`}>
-                            <Img src={SWIPER_IMGS[index]} />
+                            <ImgBg src={item.bg_img} />
+                            <Img src={item.img} />
                         </SwiperSlide>
                     );
                 })}
-            </Swiper>
-            {showButton && (
+
                 <Button onClick={handleEntrance}>
                     <Icon
-                        src="/img/onboarding/onbd_btn.svg"
+                        src="/img/onboarding/obd_btn.svg"
                         width="216px"
                         height="46px"
                     />
                 </Button>
-            )}
-        </Container>
+            </Swiper>
+        </IndexContainer>
     );
 };
 
@@ -76,16 +89,28 @@ const SwiperAnimation = keyframes`
     }
 `;
 
-const Img = styled.img`
-    width: 360px;
-    height: 640px;
+const ImgBg = styled.img`
+    position: relative;
+    width: 100%;
+`;
+
+const Img = styled.img<{ position?: string }>`
+    /* width: 360px; */
+    /* height: 640px; */
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 415px;
+    animation: ${SwiperAnimation} 0.5s;
 `;
 
 const Button = styled(DefaultButton)`
     z-index: 1;
     position: absolute;
-    bottom: 97px;
-    left: 72px;
+    bottom: 56px;
+    left: 50%;
+    transform: translate(-50%);
     width: 216px;
     height: 46px;
 `;
