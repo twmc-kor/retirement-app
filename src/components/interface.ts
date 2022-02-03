@@ -84,6 +84,8 @@ export interface IButton {
     onClick: () => void;
     /** 비활성 여부 */
     disabled?: boolean;
+    /** 로딩 여부 */
+    loading?: boolean;
 }
 /**
  * 팝업 모달

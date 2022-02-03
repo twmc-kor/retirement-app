@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Styles } from '../style/styles';
 import { Drawer } from './drawer.component';
 import { IHeader } from './interface';
-import { DefaultButton, Icon, Text } from './styles';
+import { DefaultButton, Icon } from './styles';
 
 export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) => {
     const navigate = useNavigate();

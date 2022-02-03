@@ -1,21 +1,25 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { IImageButton, ImageTypeEnum } from '../../../components/interface';
+import { ImageTypeEnum } from '../../../components/interface';
 import { DefaultButton, Icon, Wrapper } from '../../../components/styles';
 
 export const ImageButton: FC = () => {
     const navigate = useNavigate();
 
-    const handleMovePage = () => {
-        navigate('/main/message');
+    const handleMovePage = (item: ImageTypeEnum) => {
+        const userType = item
+            .replace('/img/user-type/', '')
+            .replace('.svg', '');
+
+        navigate(`/main/message/${userType}`);
     };
     return (
         <Wrapper button>
             {Object.values(ImageTypeEnum).map((item, index) => (
                 <ButtonWrapper
                     key={`image-type_${index}`}
-                    onClick={handleMovePage}
+                    onClick={() => handleMovePage(item)}
                 >
                     <Icon src={item} width="100%" height="100%" />
                 </ButtonWrapper>

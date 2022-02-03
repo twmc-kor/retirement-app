@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
-import { DefaultButton, Icon, IndexContainer } from '../../components/styles';
-import { Styles } from '../../style/styles';
+import styled from 'styled-components';
+import { IndexContainer, DefaultButton, Icon } from '../../components/styles';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Pagination } from 'swiper';
@@ -80,14 +79,14 @@ const OnboardingPage = (): JSX.Element => {
 
 export default OnboardingPage;
 
-const SwiperAnimation = keyframes`
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-`;
+// const SwiperAnimation = keyframes`
+//     from {
+//         opacity: 0;
+//     }
+//     to {
+//         opacity: 1;
+//     }
+// `;
 
 const ImgBg = styled.img`
     position: relative;
@@ -102,7 +101,6 @@ const Img = styled.img<{ position?: string }>`
     top: 0;
     left: 0;
     width: 415px;
-    animation: ${SwiperAnimation} 0.5s;
 `;
 
 const Button = styled(DefaultButton)`
