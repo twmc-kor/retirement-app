@@ -7,7 +7,9 @@ const MainPage = (): JSX.Element => {
     return (
         <MainWrapper>
             <Header back title="꽃길 레터" />
-            <Outlet />
+            <OutletWrapper>
+                <Outlet />
+            </OutletWrapper>
         </MainWrapper>
     );
 };
@@ -15,5 +17,15 @@ const MainPage = (): JSX.Element => {
 export default MainPage;
 
 const MainWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+`;
+
+const OutletWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 360px;
 `;

@@ -46,7 +46,6 @@ const MessagePage = (): JSX.Element => {
                     name={AddPostInputName.MESSAGE}
                     value={message}
                     onChange={handleChangeText}
-                    autoFocus
                 />
                 <UserNameWrapper>
                     닉네임:

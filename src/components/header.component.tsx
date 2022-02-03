@@ -25,18 +25,20 @@ export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) =>
 
     return (
         <Wrapper>
-            <IconWrapper left="20px" onClick={handleGoBack}>
-                {pathname !== '/main/class-room' && back && (
-                    <Icon src="/img/icon/back_btn.svg" />
-                )}
-            </IconWrapper>
-            <Title>{title}</Title>
-            <IconWrapper right="20px" onClick={handleOpenDrawer}>
-                <Icon src="/img/icon/menu_btn.svg" />
-            </IconWrapper>
-            <Drawer open={isDrawerOpen} close={handleCloseDrawer}>
-                이 프로젝트는 은호,혜서,은지의 협업의 결과물입니다.
-            </Drawer>
+            <InsideWrapper>
+                <IconWrapper left="20px" onClick={handleGoBack}>
+                    {pathname !== '/main/class-room' && back && (
+                        <Icon src="/img/icon/back_btn.svg" />
+                    )}
+                </IconWrapper>
+                <Title>{title}</Title>
+                <IconWrapper right="20px" onClick={handleOpenDrawer}>
+                    <Icon src="/img/icon/menu_btn.svg" />
+                </IconWrapper>
+                <Drawer open={isDrawerOpen} close={handleCloseDrawer}>
+                    이 프로젝트는 은호,혜서,은지의 협업의 결과물입니다.
+                </Drawer>
+            </InsideWrapper>
         </Wrapper>
     );
 };
@@ -44,12 +46,19 @@ export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) =>
 const Wrapper = styled.div`
     position: fixed;
     top: 0;
+
+    width: 100%;
+    height: 56px;
+    background-color: ${Styles.COLOR.HEADER};
+`;
+
+const InsideWrapper = styled.div`
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 360px;
-    height: 56px;
-    background-color: ${Styles.COLOR.HEADER};
+    width: 100%;
+    height: 100%;
 `;
 
 const IconWrapper = styled(DefaultButton)<{
@@ -67,4 +76,5 @@ const IconWrapper = styled(DefaultButton)<{
 const Title = styled.span`
     ${Styles.FONT.TITLE_NAME};
     color: ${Styles.COLOR.WHITE};
+    cursor: default;
 `;
