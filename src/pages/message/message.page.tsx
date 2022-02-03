@@ -87,7 +87,6 @@ const MessagePage = (): JSX.Element => {
                     placeholder={`교장선생님!\n항상 꽃길만 걸으시길\n응원하겠습니다!`}
                     value={message}
                     onChange={handleMessageChange}
-                    autoFocus
                 />
                 <UserNameWrapper>
                     닉네임:
