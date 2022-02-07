@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { IPost } from '../../../models';
 import { PostButton } from './post-button.component';
