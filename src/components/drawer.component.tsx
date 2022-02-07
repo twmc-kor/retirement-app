@@ -57,7 +57,7 @@ const Wrapper = styled.div<{ visible?: boolean }>`
     right: 0;
     display: ${({ visible }) => (visible ? 'flex' : 'none')};
     width: 167px;
-    height: 640px;
+    height: 100vh;
     background-color: ${Styles.COLOR.HEADER};
     transition: all 2s;
 `;

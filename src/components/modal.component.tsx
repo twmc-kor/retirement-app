@@ -83,8 +83,6 @@ const ModalContainer = styled.div<{ visible?: boolean; bgColor?: boolean }>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    ${Styles.FONT.MODAL_TEXT};
-    color: ${Styles.COLOR.MAIN_TEXT};
     border-radius: 4px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1), 0px 2px 8px rgba(0, 0, 0, 0.1);
     max-height: 95%;
@@ -102,8 +100,12 @@ const ModalContainer = styled.div<{ visible?: boolean; bgColor?: boolean }>`
         `}
 `;
 
-const ModalText = styled.span`
+const ModalText = styled.div`
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 const IconWrapper = styled(DefaultButton)`

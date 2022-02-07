@@ -67,7 +67,11 @@ export const PageTitle = styled.span<{ sub?: boolean }>`
         `}
 `;
 
-export const Text = styled.span<{ noti?: boolean }>`
+export const Text = styled.span<{
+    noti?: boolean;
+    modal?: boolean;
+    userName?: boolean;
+}>`
     ${Styles.FONT.SUB_TEXT};
     color: ${Styles.COLOR.MAIN_TEXT};
     margin-bottom: 7px;
@@ -78,6 +82,29 @@ export const Text = styled.span<{ noti?: boolean }>`
             margin: 9px 0 8px;
             ${Styles.FONT.NOTI_TEXT};
             color: ${Styles.COLOR.NOTI};
+        `}
+    ${({ modal }) =>
+        modal &&
+        css`
+            ${Styles.FONT.MODAL_TEXT};
+            color: ${Styles.COLOR.MAIN_TEXT};
+        `}
+
+        ${({ userName }) =>
+        userName &&
+        css`
+            z-index: 1;
+            vertical-align: middle;
+            overflow: hidden;
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: inline-block;
+            ${Styles.FONT.USER_NAME};
+            color: ${Styles.COLOR.WHITE};
         `}
 `;
 
@@ -90,4 +117,8 @@ export const DefaultButton = styled.button`
     border-radius: 5px;
     background-color: transparent;
     cursor: pointer;
+
+    /* &:hover {
+        opacity: 0.8;
+    } */
 `;

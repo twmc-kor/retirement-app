@@ -44,9 +44,9 @@ export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) =>
 };
 
 const Wrapper = styled.div`
+    z-index: 10;
     position: fixed;
     top: 0;
-
     width: 100%;
     height: 56px;
     background-color: ${Styles.COLOR.HEADER};

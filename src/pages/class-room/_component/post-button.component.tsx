@@ -1,8 +1,7 @@
 import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Styles } from '../../../style/styles';
 import { IPostButton } from '../../../components/interface';
-import { DefaultButton, Icon } from '../../../components/styles';
+import { DefaultButton, Icon, Text } from '../../../components/styles';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../../../components';
 
@@ -30,6 +29,7 @@ export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
                         src="/img/icon/add_btn.svg"
                         width="25px"
                         height="25px"
+                        marginBottom="15px"
                     />
                     <Text>
                         메세지
@@ -41,36 +41,18 @@ export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
         }
         if (post) {
             return (
-                <div style={{ position: 'relative' }}>
+                <PostImgWrapper>
                     <Icon
-                        src={`/img/user-type/${post.imageType}.svg`}
+                        src={`/img/user-type/with-desk/with-desk_${post.imageType}.svg`}
                         width="96px"
                         height="112px"
                     />
-                    <div
-                        style={{
-                            position: 'absolute',
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            background: 'rgba(0,0,0,0.5)',
-                            paddingTop: 8,
-                            paddingBottom: 8,
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontSize: 16,
-                                color: 'white',
-                            }}
-                        >
-                            {post.nickname}
-                        </Text>
-                    </div>
-                </div>
+                    <Text userName>{post.nickname}</Text>
+                </PostImgWrapper>
             );
+        } else {
+            return <Icon src="/img/smile_bg.svg" width="96px" height="112px" />;
         }
-        return <Icon src="/img/smile_bg.svg" width="96px" height="112px" />;
     };
 
     return (
@@ -87,7 +69,10 @@ export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
                 visible={openModal}
                 bgColor="grey"
                 closeBtn="close"
-            />
+            >
+                <Text modal>메세지는 수신인만</Text>
+                <Text modal>열람이 가능합니다!</Text>
+            </Modal>
         </>
     );
 };
@@ -120,8 +105,7 @@ const IconWrapper = styled(DefaultButton)`
     background-image: url('/img/empty_bg.svg');
 `;
 
-const Text = styled.span`
-    margin-top: 15px;
-    ${Styles.FONT.SUB_TEXT};
-    color: ${Styles.COLOR.MAIN_TEXT};
+const PostImgWrapper = styled.div`
+    z-index: 1;
+    position: relative;
 `;

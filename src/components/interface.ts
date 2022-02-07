@@ -97,7 +97,8 @@ export interface IModal {
     visible: boolean;
     bgColor?: string;
     closeBtn?: string;
-    children?: string;
+    // children?: JSX.Element;
+    children?: any;
 }
 /**
  * Drawer

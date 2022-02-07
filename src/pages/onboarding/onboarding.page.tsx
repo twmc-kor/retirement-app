@@ -10,10 +10,6 @@ import 'swiper/swiper.min.css';
 
 const SWIPER_IMGS = [
     {
-        bg_img: '/img/onboarding/obd_bg1.svg',
-        img: '/img/onboarding/obd_elmt1.svg',
-    },
-    {
         bg_img: '/img/onboarding/obd_bg2.svg',
         img: '/img/onboarding/obd_elmt2.svg',
     },
@@ -24,6 +20,10 @@ const SWIPER_IMGS = [
     {
         bg_img: '/img/onboarding/obd_bg4.svg',
         img: '/img/onboarding/obd_elmt4.svg',
+    },
+    {
+        bg_img: '/img/onboarding/obd_bg1.svg',
+        img: '/img/onboarding/obd_elmt1.svg',
     },
     {
         bg_img: '/img/onboarding/obd_bg5.svg',
@@ -79,28 +79,17 @@ const OnboardingPage = (): JSX.Element => {
 
 export default OnboardingPage;
 
-// const SwiperAnimation = keyframes`
-//     from {
-//         opacity: 0;
-//     }
-//     to {
-//         opacity: 1;
-//     }
-// `;
-
 const ImgBg = styled.img`
     position: relative;
     width: 100%;
 `;
 
 const Img = styled.img<{ position?: string }>`
-    /* width: 360px; */
-    /* height: 640px; */
     z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
-    width: 415px;
+    width: 100%;
 `;
 
 const Button = styled(DefaultButton)`

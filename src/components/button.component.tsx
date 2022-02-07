@@ -28,6 +28,10 @@ const ButtonContainer = styled(DefaultButton)<{ disabled?: boolean }>`
     color: ${Styles.COLOR.WHITE};
     cursor: pointer;
 
+    &:hover {
+        background-color: ${Styles.COLOR.MAIN_TEXT};
+    }
+
     ${({ disabled }) =>
         disabled &&
         css`

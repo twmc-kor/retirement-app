@@ -17,7 +17,8 @@ const IndexPage = (): JSX.Element => {
     return (
         <IndexContainer>
             <Container hasHeader>
-                <Img src="/img/onboarding/index_bg.svg" />
+                <ImgBg src="/img/onboarding/index_bg.svg" />
+                <Img src="/img/onboarding/index_elmt.svg" />
                 <Button onClick={handleEntrance}>
                     <Icon
                         src="/img/onboarding/index_btn.svg"
@@ -32,16 +33,23 @@ const IndexPage = (): JSX.Element => {
 
 export default IndexPage;
 
-const Img = styled.img`
+const ImgBg = styled.img`
     position: relative;
-    /* width: 360px;
-    height: 640px; */
-    /* width: 100vw; */
     height: 100vh;
+`;
+
+const Img = styled.img`
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* height: 100%; */
 `;
 
 const Button = styled(DefaultButton)`
     position: absolute;
-    bottom: 97px;
-    left: 72px;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(-50%);
 `;
