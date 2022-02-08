@@ -22,8 +22,8 @@ const IndexPage = (): JSX.Element => {
                 <Button onClick={handleEntrance}>
                     <Icon
                         src="/img/onboarding/index_btn.svg"
-                        width="216px"
-                        height="46px"
+                        width="100%"
+                        height="100%"
                     />
                 </Button>
             </Container>
@@ -35,7 +35,7 @@ export default IndexPage;
 
 const ImgBg = styled.img`
     position: relative;
-    height: 100vh;
+    width: 100vw;
 `;
 
 const Img = styled.img`
