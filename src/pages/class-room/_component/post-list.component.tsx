@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import styled from 'styled-components';
 import { IPost } from '../../../models';
 import { PostButton } from './post-button.component';
@@ -11,10 +11,10 @@ interface IProps {
  * 게시물 목록
  */
 export const PostList: FC<IProps> = ({ posts }) => {
-    // const placeholders = useMemo(
-    //     () => new Array(2 - (posts.length % 3)).fill(true),
-    //     [posts],
-    // );
+    const placeholders = useMemo(
+        () => new Array(2 - (posts.length % 3)).fill(true),
+        [posts],
+    );
 
     return (
         <Container>
@@ -22,12 +22,9 @@ export const PostList: FC<IProps> = ({ posts }) => {
             {posts.map((post) => (
                 <PostButton key={`post-item-${post.id}`} post={post} />
             ))}
-            {/* {placeholders.map((_, i) => (
+            {placeholders.map((_, i) => (
                 <PostButton key={`placeholder-${i}`} />
-            ))} */}
-            <PostButton />
-            <PostButton />
-            <PostButton />
+            ))}
         </Container>
     );
 };
