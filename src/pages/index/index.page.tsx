@@ -48,8 +48,11 @@ const Img = styled.img`
 `;
 
 const Button = styled(DefaultButton)`
+    z-index: 5;
     position: absolute;
     bottom: 60px;
     left: 50%;
+    width: 216px;
+    height: 46px;
     transform: translate(-50%);
 `;
