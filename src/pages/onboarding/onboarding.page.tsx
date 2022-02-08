@@ -21,13 +21,14 @@ const SWIPER_IMGS = [
         bg_img: '/img/onboarding/obd_bg4.svg',
         img: '/img/onboarding/obd_elmt4.svg',
     },
-    {
-        bg_img: '/img/onboarding/obd_bg1.svg',
-        img: '/img/onboarding/obd_elmt1.svg',
-    },
+
     {
         bg_img: '/img/onboarding/obd_bg5.svg',
         img: '/img/onboarding/obd_elmt5.svg',
+    },
+    {
+        bg_img: '/img/onboarding/obd_bg1.svg',
+        img: '/img/onboarding/obd_elmt1.svg',
     },
 ];
 
