@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { IPost } from '../models';
 
 /**
@@ -107,7 +108,4 @@ export interface IDrawer {
     /** 열기 여부 */
     open: boolean;
     close: () => void;
-
-    /** 하위 컴포넌트 */
-    children: string;
 }

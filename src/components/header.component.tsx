@@ -35,9 +35,7 @@ export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) =>
                 <IconWrapper right="20px" onClick={handleOpenDrawer}>
                     <Icon src="/img/icon/menu_btn.svg" />
                 </IconWrapper>
-                <Drawer open={isDrawerOpen} close={handleCloseDrawer}>
-                    이 프로젝트는 은호,혜서,은지의 협업의 결과물입니다.
-                </Drawer>
+                <Drawer open={isDrawerOpen} close={handleCloseDrawer} />
             </InsideWrapper>
         </Wrapper>
     );
