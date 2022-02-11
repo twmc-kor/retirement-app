@@ -43,19 +43,13 @@ const OnboardingPage = (): JSX.Element => {
 
     return (
         <IndexContainer>
-            <Swiper
+            <SwiperContainer
                 pagination={{
                     clickable: true,
-                    type: 'bullets',
                 }}
-                autoplay={{ delay: 2500, stopOnLastSlide: true }}
+                autoplay={{ delay: 3000, stopOnLastSlide: true }}
                 spaceBetween={50}
                 slidesPerView={1}
-                style={{
-                    width: '415px',
-                    // height: '640px',
-                    position: 'relative',
-                }}
             >
                 {SWIPER_IMGS.map((item, index) => {
                     return (
@@ -73,7 +67,7 @@ const OnboardingPage = (): JSX.Element => {
                         height="46px"
                     />
                 </Button>
-            </Swiper>
+            </SwiperContainer>
         </IndexContainer>
     );
 };
@@ -83,6 +77,7 @@ export default OnboardingPage;
 const ImgBg = styled.img`
     position: relative;
     width: 100%;
+    height: 100%;
 `;
 
 const Img = styled.img<{ position?: string }>`
@@ -91,6 +86,17 @@ const Img = styled.img<{ position?: string }>`
     top: 0;
     left: 0;
     width: 100%;
+`;
+
+const SwiperContainer = styled(Swiper)`
+    position: relative;
+    width: 415px;
+    height: 100%;
+
+    .swiper-pagination {
+        bottom: 124px !important;
+        /* bottom: calc(env(safe-area-inset-bottom) + 20px) !important; */
+    }
 `;
 
 const Button = styled(DefaultButton)`
