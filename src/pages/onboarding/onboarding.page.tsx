@@ -10,6 +10,10 @@ import 'swiper/swiper.min.css';
 
 const SWIPER_IMGS = [
     {
+        bg_img: '/img/onboarding/obd_bg1.svg',
+        img: '/img/onboarding/obd_elmt1.svg',
+    },
+    {
         bg_img: '/img/onboarding/obd_bg2.svg',
         img: '/img/onboarding/obd_elmt2.svg',
     },
@@ -25,10 +29,6 @@ const SWIPER_IMGS = [
     {
         bg_img: '/img/onboarding/obd_bg5.svg',
         img: '/img/onboarding/obd_elmt5.svg',
-    },
-    {
-        bg_img: '/img/onboarding/obd_bg1.svg',
-        img: '/img/onboarding/obd_elmt1.svg',
     },
 ];
 
@@ -76,8 +76,7 @@ export default OnboardingPage;
 
 const ImgBg = styled.img`
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
 `;
 
 const Img = styled.img<{ position?: string }>`
@@ -90,12 +89,10 @@ const Img = styled.img<{ position?: string }>`
 
 const SwiperContainer = styled(Swiper)`
     position: relative;
-    width: 415px;
-    height: 100%;
+    width: 100%;
 
     .swiper-pagination {
         bottom: 124px !important;
-        /* bottom: calc(env(safe-area-inset-bottom) + 20px) !important; */
     }
 `;
 

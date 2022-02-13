@@ -59,20 +59,17 @@ export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
         <>
             <ButtonWrapper
                 onClick={handleClick}
-                hasNothing={!onRegister || !post}
+                hasNothing={!onRegister && !post}
             >
                 {renderComponent()}
             </ButtonWrapper>
             <Modal
-                iconUrl="/img/icon/alert_icon.svg"
+                iconUrl="/img/alert_modal2.svg"
                 close={() => setOpenModal(false)}
                 visible={openModal}
-                bgColor="grey"
                 closeBtn="close"
-            >
-                <Text modal>메세지는 수신인만</Text>
-                <Text modal>열람이 가능합니다!</Text>
-            </Modal>
+                big
+            ></Modal>
         </>
     );
 };
@@ -88,11 +85,11 @@ const ButtonWrapper = styled(DefaultButton)<IconWrapperType>`
     margin-bottom: 16px;
     cursor: pointer;
 
-    /* ${({ hasNothing }) =>
+    ${({ hasNothing }) =>
         hasNothing &&
         css`
             pointer-events: none;
-        `} */
+        `}
 `;
 
 const IconWrapper = styled(DefaultButton)`

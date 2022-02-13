@@ -13,7 +13,7 @@ export const Drawer: FC<IDrawer> = ({ open, close }) => {
                     <Icon src="/img/icon/wt_close_btn.svg" />
                 </IconWrapper>
                 <TextWrapper>
-                    <TitleText>꽃길레터</TitleText>
+                    <TitleText>꽃길 레터</TitleText>
                     <Text>이 프로젝트에</Text>
                     <Text>함께 해주셔서 감사합니다.</Text>
                     <br />
@@ -24,10 +24,21 @@ export const Drawer: FC<IDrawer> = ({ open, close }) => {
                     <Text>전달 후기를</Text>
                     <Text>업데이트 해둘게요 :)</Text>
                     <br />
-                    <Text>총괄&서버는 아들 은호가,</Text>
+                    <Text>
+                        총괄&서버는 아들 <strong>은호</strong>가,
+                    </Text>
                     <Text>프론트작업은 딸 은지가,</Text>
                     <Text>디자인은 제자 혜서가</Text>
-                    <Text>작업한 프로젝트입니다 *_*</Text>
+                    <div>
+                        <Text>작업한 프로젝트입니다</Text>
+                        <Icon
+                            src="/img/icon/smile.png"
+                            width="10px"
+                            height="10px"
+                            marginLeft="3px"
+                            filterColor
+                        />
+                    </div>
                 </TextWrapper>
                 <ImgWrapper>
                     <NameWrapper>
@@ -51,7 +62,25 @@ const DrawerBgVisible = keyframes`
     }
 `;
 
-const DrawerBg = styled.div<{ visible?: boolean }>`
+const DrawerAniShow = keyframes`
+from {
+    right: -167px;
+}
+to{
+    right: 0;
+}
+`;
+
+const DrawerAniHide = keyframes`
+from {
+    right: 0;
+}
+to{
+    right: -167px;
+}
+`;
+
+const DrawerBg = styled.div<{ visible?: boolean | null }>`
     z-index: 10;
     position: fixed;
     top: 0px;
@@ -66,7 +95,7 @@ const DrawerBg = styled.div<{ visible?: boolean }>`
     animation: ${DrawerBgVisible} 0.3s;
 `;
 
-const Wrapper = styled.div<{ visible?: boolean }>`
+const Wrapper = styled.div<{ visible?: boolean | null }>`
     z-index: 50;
     position: absolute;
     top: 0;
@@ -75,7 +104,8 @@ const Wrapper = styled.div<{ visible?: boolean }>`
     width: 167px;
     height: 100vh;
     background-color: ${Styles.COLOR.HEADER};
-    transition: all 2s;
+    transition: width all 0.5s;
+    animation: ${DrawerAniShow} 0.5s ease;
 `;
 
 const IconWrapper = styled(DefaultButton)`

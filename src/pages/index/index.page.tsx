@@ -16,7 +16,7 @@ const IndexPage = (): JSX.Element => {
     };
     return (
         <IndexContainer>
-            <Container hasHeader>
+            <Container fullHeight>
                 <ImgBg src="/img/onboarding/index_bg.svg" />
                 <Img src="/img/onboarding/index_elmt.svg" />
                 <Button onClick={handleEntrance}>
@@ -44,7 +44,6 @@ const Img = styled.img`
     top: 0;
     left: 0;
     width: 100%;
-    /* height: 100%; */
 `;
 
 const Button = styled(DefaultButton)`

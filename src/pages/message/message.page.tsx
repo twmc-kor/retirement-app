@@ -55,6 +55,7 @@ const MessagePage = (): JSX.Element => {
                         value={nickname}
                         onChange={handleChangeText}
                         maxLength={6}
+                        autoComplete="off"
                     />
                 </UserNameWrapper>
                 <Button

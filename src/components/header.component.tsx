@@ -9,7 +9,7 @@ import { DefaultButton, Icon } from './styles';
 export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean | null>(null);
 
     const handleGoBack = () => {
         navigate(-1);

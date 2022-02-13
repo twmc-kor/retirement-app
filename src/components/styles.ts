@@ -6,6 +6,8 @@ type IconType = {
     height?: string;
     marginBottom?: string;
     marginTop?: string;
+    marginLeft?: string;
+    filterColor?: boolean;
 };
 
 export const IndexContainer = styled.div`
@@ -14,16 +16,16 @@ export const IndexContainer = styled.div`
     justify-content: center;
 `;
 
-export const Container = styled.div<{ hasHeader?: boolean }>`
+export const Container = styled.div<{ fullHeight?: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 360px;
-    margin-top: ${({ hasHeader }) => (hasHeader ? '0' : '56px')};
+    margin-top: ${({ fullHeight }) => (fullHeight ? '0' : '56px')};
 
-    ${({ hasHeader }) =>
-        hasHeader &&
+    ${({ fullHeight }) =>
+        fullHeight &&
         css`
             position: relative;
         `}
@@ -51,6 +53,14 @@ export const Icon = styled.img<IconType>`
     margin-bottom: ${({ marginBottom }) =>
         marginBottom ? marginBottom : '0px'};
     margin-top: ${({ marginTop }) => (marginTop ? marginTop : '0px')};
+    margin-left: ${({ marginLeft }) => (marginLeft ? marginLeft : '0px')};
+
+    ${({ filterColor }) =>
+        filterColor &&
+        css`
+            filter: invert(100%) sepia(1%) saturate(7492%) hue-rotate(25deg)
+                brightness(104%) contrast(104%);
+        `}
 `;
 
 export const PageTitle = styled.span<{ sub?: boolean }>`

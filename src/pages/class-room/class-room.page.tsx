@@ -42,7 +42,7 @@ const ClassRoomPage = (): JSX.Element => {
                     개의 마음이 전달되었어요!
                 </PageTitle>
             </PageTitleWrapper>
-            <BlackBoard dday={theDay} />
+            <BlackBoard />
             {loading ? renderEmptyState() : <PostList posts={posts} />}
         </Container>
     );

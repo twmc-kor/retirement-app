@@ -1,22 +1,50 @@
 import React, { FC } from 'react';
+import Countdown from 'react-countdown';
 import styled, { css } from 'styled-components';
 import { Styles } from '../../../style/styles';
-import { IBlackBoard } from '../../../components/interface';
 
 /**
  * 칠판
  */
-export const BlackBoard: FC<IBlackBoard> = ({ dday }) => {
+
+type CountdownType = {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+    completed: boolean;
+};
+
+export const BlackBoard: FC = () => {
+    const Completionist = () => <Text>전달되었어요! 감사합니다!</Text>;
+
+    const renderer = ({
+        days,
+        hours,
+        minutes,
+        seconds,
+        completed,
+    }: CountdownType) => {
+        if (completed) {
+            return <Completionist />;
+        } else {
+            return (
+                <div>
+                    <Text day>D - {days}</Text>
+                    <Text time>
+                        {hours}시간 {minutes}분 {seconds}초 후 전달됩니다!
+                    </Text>
+                </div>
+            );
+        }
+    };
     return (
         <Wrapper>
             <BlackBoardWrapper>
-                {/* <Icon
-                    src="/img/black-board_img.svg"
-                    width="320px"
-                    height="200px"
-                /> */}
-                <Text>메세지 전달일</Text>
-                <Text day>D-{dday}</Text>
+                <CountdownWrapper>
+                    <Text>메세지가</Text>
+                    <Countdown date="2022-02-18T18:00:00" renderer={renderer} />
+                </CountdownWrapper>
             </BlackBoardWrapper>
         </Wrapper>
     );
@@ -27,26 +55,42 @@ const Wrapper = styled.span`
 `;
 
 const BlackBoardWrapper = styled.div`
-    z-index: -1;
-    position: relative;
     width: 320px;
     height: 200px;
     background-image: url('/img/black-board_img.svg');
 `;
 
-const Text = styled.span<{ day?: boolean }>`
-    position: absolute;
+const CountdownWrapper = styled.div`
     display: flex;
-    top: calc(50% - 40px);
-    left: calc(50% - 50px);
-    ${Styles.FONT.SUB_TEXT};
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-top: -10px;
+`;
+
+const Text = styled.span<{ day?: boolean; time?: boolean; complete?: boolean }>`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: ${Styles.COLOR.WHITE};
+
+    ${Styles.FONT.NOTI_TEXT};
 
     ${({ day }) =>
         day &&
         css`
-            top: calc(50% - 15px);
-            left: calc(50% - 25px);
+            margin-top: -5px;
             ${Styles.FONT.TITLE_NAME};
         `}
+
+    ${({ time }) =>
+        time &&
+        css`
+            margin-bottom: -5px;
+        `} /* ${({ complete }) =>
+        complete &&
+        css`
+            margin-bottom: -5px;
+        `} */
 `;

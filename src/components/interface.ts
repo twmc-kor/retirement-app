@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { IPost } from '../models';
 
 /**
@@ -98,6 +97,7 @@ export interface IModal {
     visible: boolean;
     bgColor?: string;
     closeBtn?: string;
+    big?: boolean;
     // children?: JSX.Element;
     children?: any;
 }
@@ -106,6 +106,6 @@ export interface IModal {
  */
 export interface IDrawer {
     /** 열기 여부 */
-    open: boolean;
+    open: boolean | null;
     close: () => void;
 }
