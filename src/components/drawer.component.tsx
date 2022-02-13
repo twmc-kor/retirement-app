@@ -71,15 +71,6 @@ to{
 }
 `;
 
-const DrawerAniHide = keyframes`
-from {
-    right: 0;
-}
-to{
-    right: -167px;
-}
-`;
-
 const DrawerBg = styled.div<{ visible?: boolean | null }>`
     z-index: 10;
     position: fixed;
