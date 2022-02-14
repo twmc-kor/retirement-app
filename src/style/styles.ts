@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0 auto;
     padding: 0;
+    height: 100%;
   }
 
 `;

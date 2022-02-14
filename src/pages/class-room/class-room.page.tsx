@@ -16,15 +16,6 @@ const ClassRoomPage = (): JSX.Element => {
 
     const messageCount = useMemo(() => posts.length, [posts]);
 
-    const date = new Date();
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0, 0);
-    const theDate = new Date('2022/02/18');
-
-    /** D-day 표시 */
-    const theDay = (theDate.getTime() - date.getTime()) / (1000 * 60 * 60 * 24);
-
     const renderEmptyState = () => {
         return (
             <EmptyStateWrapper>
@@ -42,7 +33,7 @@ const ClassRoomPage = (): JSX.Element => {
                     개의 마음이 전달되었어요!
                 </PageTitle>
             </PageTitleWrapper>
-            <BlackBoard dday={theDay} />
+            <BlackBoard />
             {loading ? renderEmptyState() : <PostList posts={posts} />}
         </Container>
     );

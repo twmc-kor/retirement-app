@@ -27,6 +27,7 @@ const SWIPER_IMGS = [
         bg_img: '/img/onboarding/obd_bg4.svg',
         img: '/img/onboarding/obd_elmt4.svg',
     },
+
     {
         bg_img: '/img/onboarding/obd_bg5.svg',
         img: '/img/onboarding/obd_elmt5.svg',
@@ -47,19 +48,13 @@ const OnboardingPage = (): JSX.Element => {
 
     return (
         <IndexContainer>
-            <Swiper
+            <SwiperContainer
                 pagination={{
                     clickable: true,
-                    type: 'bullets',
                 }}
-                autoplay={{ delay: 2500, stopOnLastSlide: true }}
+                autoplay={{ delay: 3000, stopOnLastSlide: true }}
                 spaceBetween={50}
                 slidesPerView={1}
-                style={{
-                    width: '415px',
-                    // height: '640px',
-                    position: 'relative',
-                }}
             >
                 {SWIPER_IMGS.map((item, index) => {
                     return (
@@ -77,35 +72,33 @@ const OnboardingPage = (): JSX.Element => {
                         height="46px"
                     />
                 </Button>
-            </Swiper>
+            </SwiperContainer>
         </IndexContainer>
     );
 };
 
 export default OnboardingPage;
 
-// const SwiperAnimation = keyframes`
-//     from {
-//         opacity: 0;
-//     }
-//     to {
-//         opacity: 1;
-//     }
-// `;
-
 const ImgBg = styled.img`
     position: relative;
-    width: 100%;
+    width: 100vw;
 `;
 
 const Img = styled.img<{ position?: string }>`
-    /* width: 360px; */
-    /* height: 640px; */
     z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
-    width: 415px;
+    width: 100%;
+`;
+
+const SwiperContainer = styled(Swiper)`
+    position: relative;
+    width: 100%;
+
+    .swiper-pagination {
+        bottom: 124px !important;
+    }
 `;
 
 const Button = styled(DefaultButton)`

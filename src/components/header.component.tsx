@@ -11,7 +11,7 @@ import { DefaultButton, Icon } from './styles';
 export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean | null>(null);
 
     const logEvent = useAnalytics(AnalyticsScreenEnum.ETC);
 
@@ -40,18 +40,16 @@ export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) =>
                 <IconWrapper right="20px" onClick={handleOpenDrawer}>
                     <Icon src="/img/icon/menu_btn.svg" />
                 </IconWrapper>
-                <Drawer open={isDrawerOpen} close={handleCloseDrawer}>
-                    이 프로젝트는 은호,혜서,은지의 협업의 결과물입니다.
-                </Drawer>
+                <Drawer open={isDrawerOpen} close={handleCloseDrawer} />
             </InsideWrapper>
         </Wrapper>
     );
 };
 
 const Wrapper = styled.div`
+    z-index: 10;
     position: fixed;
     top: 0;
-
     width: 100%;
     height: 56px;
     background-color: ${Styles.COLOR.HEADER};

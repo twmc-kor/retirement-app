@@ -1,8 +1,7 @@
 import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Styles } from '../../../style/styles';
 import { IPostButton } from '../../../components/interface';
-import { DefaultButton, Icon } from '../../../components/styles';
+import { DefaultButton, Icon, Text } from '../../../components/styles';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../../../components';
 import { useAnalytics } from '../../../hooks/useAnalytics.hook';
@@ -25,6 +24,9 @@ export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
         if (post) {
             // TODO: 추후 게시물 오픈해야 되는 경우 modal 함수 제거 후 상세페이지 연결: remote config?
             logEvent(AnalyticsTypeEnum.OPEN_POST);
+
+            // 하단 게시물 클릭 시 모달이 보이지 않는 이슈 임시 해결
+            window.scrollTo({ top: 0 });
             return setOpenModal(true);
         }
     };
@@ -37,6 +39,7 @@ export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
                         src="/img/icon/add_btn.svg"
                         width="25px"
                         height="25px"
+                        marginBottom="15px"
                     />
                     <Text>
                         메세지
@@ -48,53 +51,35 @@ export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
         }
         if (post) {
             return (
-                <div style={{ position: 'relative' }}>
+                <PostImgWrapper>
                     <Icon
-                        src={`/img/user-type/${post.imageType}.svg`}
+                        src={`/img/user-type/with-desk/with-desk_${post.imageType}.svg`}
                         width="96px"
                         height="112px"
                     />
-                    <div
-                        style={{
-                            position: 'absolute',
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            background: 'rgba(0,0,0,0.5)',
-                            paddingTop: 8,
-                            paddingBottom: 8,
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontSize: 16,
-                                color: 'white',
-                            }}
-                        >
-                            {post.nickname}
-                        </Text>
-                    </div>
-                </div>
+                    <Text userName>{post.nickname}</Text>
+                </PostImgWrapper>
             );
+        } else {
+            return <Icon src="/img/smile_bg.svg" width="96px" height="112px" />;
         }
-        return <Icon src="/img/smile_bg.svg" width="96px" height="112px" />;
     };
 
     return (
         <>
             <ButtonWrapper
                 onClick={handleClick}
-                hasNothing={!onRegister || !post}
+                hasNothing={!onRegister && !post}
             >
                 {renderComponent()}
             </ButtonWrapper>
             <Modal
-                iconUrl="/img/icon/alert_icon.svg"
+                iconUrl="/img/alert_modal2.svg"
                 close={() => setOpenModal(false)}
                 visible={openModal}
-                bgColor="grey"
                 closeBtn="close"
-            />
+                big
+            ></Modal>
         </>
     );
 };
@@ -110,11 +95,11 @@ const ButtonWrapper = styled(DefaultButton)<IconWrapperType>`
     margin-bottom: 16px;
     cursor: pointer;
 
-    /* ${({ hasNothing }) =>
+    ${({ hasNothing }) =>
         hasNothing &&
         css`
             pointer-events: none;
-        `} */
+        `}
 `;
 
 const IconWrapper = styled(DefaultButton)`
@@ -127,8 +112,7 @@ const IconWrapper = styled(DefaultButton)`
     background-image: url('/img/empty_bg.svg');
 `;
 
-const Text = styled.span`
-    margin-top: 15px;
-    ${Styles.FONT.SUB_TEXT};
-    color: ${Styles.COLOR.MAIN_TEXT};
+const PostImgWrapper = styled.div`
+    z-index: 1;
+    position: relative;
 `;

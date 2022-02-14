@@ -60,6 +60,7 @@ const MessagePage = (): JSX.Element => {
                         value={nickname}
                         onChange={handleChangeText}
                         maxLength={6}
+                        autoComplete="off"
                     />
                 </UserNameWrapper>
                 <Button
@@ -82,7 +83,7 @@ const MessagePage = (): JSX.Element => {
                 bgColor="grey"
                 closeBtn="close"
             >
-                이미 사용중인 닉네임입니다!
+                <Text modal>이미 사용중인 닉네임입니다!</Text>
             </Modal>
         </Container>
     );
@@ -91,7 +92,6 @@ const MessagePage = (): JSX.Element => {
 export default MessagePage;
 
 const LetterWrapper = styled.div`
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
