@@ -17,6 +17,9 @@ export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
         }
         if (post) {
             // TODO: 추후 게시물 오픈해야 되는 경우 modal 함수 제거 후 상세페이지 연결: remote config?
+
+            // 하단 게시물 클릭 시 모달이 보이지 않는 이슈 임시 해결
+            window.scrollTo({ top: 0 });
             return setOpenModal(true);
         }
     };
