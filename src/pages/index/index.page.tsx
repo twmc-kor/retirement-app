@@ -7,13 +7,19 @@ import {
     Icon,
     IndexContainer,
 } from '../../components/styles';
+import { useAnalytics } from '../../hooks/useAnalytics.hook';
+import { AnalyticsScreenEnum, AnalyticsTypeEnum } from '../../services';
 
 const IndexPage = (): JSX.Element => {
     const navigation = useNavigate();
 
+    const logEvent = useAnalytics(AnalyticsScreenEnum.INDEX);
+
     const handleEntrance = () => {
+        logEvent(AnalyticsTypeEnum.ENTER_SCREEN);
         navigation('/onboarding');
     };
+
     return (
         <IndexContainer>
             <Container fullHeight>

@@ -4,19 +4,26 @@ import { IPostButton } from '../../../components/interface';
 import { DefaultButton, Icon, Text } from '../../../components/styles';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../../../components';
+import { useAnalytics } from '../../../hooks/useAnalytics.hook';
+import { AnalyticsScreenEnum, AnalyticsTypeEnum } from '../../../services';
 
 export const PostButton: FC<IPostButton> = ({ post, onRegister }) => {
     const navigate = useNavigate();
 
     const [openModal, setOpenModal] = useState<boolean>(false);
 
+    const logEvent = useAnalytics(AnalyticsScreenEnum.CLASSROOM);
+
     const handleClick = () => {
         if (onRegister) {
             // 등록 페이지 전환
+            logEvent(AnalyticsTypeEnum.ENTER_SCREEN);
+            logEvent(AnalyticsTypeEnum.CLICK_FOR_REGISTER);
             return navigate('/main/user-styling');
         }
         if (post) {
             // TODO: 추후 게시물 오픈해야 되는 경우 modal 함수 제거 후 상세페이지 연결: remote config?
+            logEvent(AnalyticsTypeEnum.OPEN_POST);
 
             // 하단 게시물 클릭 시 모달이 보이지 않는 이슈 임시 해결
             window.scrollTo({ top: 0 });

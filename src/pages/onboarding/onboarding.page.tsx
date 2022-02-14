@@ -7,6 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Pagination } from 'swiper';
 import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/swiper.min.css';
+import { useAnalytics } from '../../hooks/useAnalytics.hook';
+import { AnalyticsScreenEnum, AnalyticsTypeEnum } from '../../services';
 
 const SWIPER_IMGS = [
     {
@@ -37,7 +39,10 @@ const OnboardingPage = (): JSX.Element => {
 
     const navigation = useNavigate();
 
+    const logEvent = useAnalytics(AnalyticsScreenEnum.ONBOARDING);
+
     const handleEntrance = () => {
+        logEvent(AnalyticsTypeEnum.ENTER_SCREEN);
         navigation('/main/class-room');
     };
 

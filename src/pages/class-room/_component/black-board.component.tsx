@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import Countdown from 'react-countdown';
 import styled, { css } from 'styled-components';
 import { Styles } from '../../../style/styles';
+import { useAnalytics } from '../../../hooks/useAnalytics.hook';
+import { AnalyticsScreenEnum } from '../../../services';
 
 /**
  * 칠판
@@ -17,6 +19,8 @@ type CountdownType = {
 
 export const BlackBoard: FC = () => {
     const Completionist = () => <Text>전달되었어요! 감사합니다!</Text>;
+
+    useAnalytics(AnalyticsScreenEnum.CLASSROOM);
 
     const renderer = ({
         days,

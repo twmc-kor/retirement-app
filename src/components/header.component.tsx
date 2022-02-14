@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAnalytics } from '../hooks/useAnalytics.hook';
+import { AnalyticsScreenEnum, AnalyticsTypeEnum } from '../services';
 import { Styles } from '../style/styles';
 import { Drawer } from './drawer.component';
 import { IHeader } from './interface';
@@ -11,11 +13,14 @@ export const Header: FC<IHeader> = ({ back = true, title = '꽃길 레터' }) =>
     const { pathname } = useLocation();
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean | null>(null);
 
+    const logEvent = useAnalytics(AnalyticsScreenEnum.ETC);
+
     const handleGoBack = () => {
         navigate(-1);
     };
 
     const handleOpenDrawer = () => {
+        logEvent(AnalyticsTypeEnum.OPEN_SIDEBAR);
         setIsDrawerOpen(true);
     };
 

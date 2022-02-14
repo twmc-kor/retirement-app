@@ -3,14 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ImageTypeEnum } from '../../../components/interface';
 import { DefaultButton, Icon, Wrapper } from '../../../components/styles';
+import { useAnalytics } from '../../../hooks/useAnalytics.hook';
+import { AnalyticsScreenEnum, AnalyticsTypeEnum } from '../../../services';
 
 export const ImageButton: FC = () => {
     const navigate = useNavigate();
+
+    const logEvent = useAnalytics(AnalyticsScreenEnum.USER_STYLING);
 
     const handleMovePage = (item: ImageTypeEnum) => {
         const userType = item
             .replace('/img/user-type/', '')
             .replace('.svg', '');
+
+        logEvent(AnalyticsTypeEnum.ENTER_SCREEN);
+        logEvent(AnalyticsTypeEnum.SELECT_IMAGE);
 
         navigate(`/main/message/${userType}`);
     };
