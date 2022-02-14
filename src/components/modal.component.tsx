@@ -10,6 +10,7 @@ export const Modal = ({
     visible,
     bgColor,
     closeBtn = 'confirm',
+    big,
     children,
 }: IModal): JSX.Element => {
     return (
@@ -19,8 +20,13 @@ export const Modal = ({
                 onClick={(e: React.MouseEvent) => e.stopPropagation()}
                 visible={visible}
                 bgColor={bgColor === 'grey'}
+                size={big}
             >
-                <Icon src={iconUrl} width="273px" height="273px" />
+                <Icon
+                    src={iconUrl}
+                    width="273px"
+                    height={big ? '430px' : '273px'}
+                />
                 <ModalText>{children}</ModalText>
                 <IconWrapper onClick={close}>
                     {closeBtn === 'close' ? (
@@ -77,16 +83,20 @@ const ModalBg = styled.div<{ visible?: boolean; bgColor?: string }>`
     animation: ${ModalBgVisible} 0.3s;
 `;
 
-const ModalContainer = styled.div<{ visible?: boolean; bgColor?: boolean }>`
+const ModalContainer = styled.div<{
+    visible?: boolean;
+    bgColor?: boolean;
+    size?: boolean;
+}>`
     z-index: 100;
     display: ${({ visible }) => (visible ? 'flex' : 'none')};
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    ${Styles.FONT.MODAL_TEXT};
-    color: ${Styles.COLOR.MAIN_TEXT};
     border-radius: 4px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1), 0px 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: ${({ size }) =>
+        !size &&
+        '0px 8px 20px rgba(0, 0, 0, 0.1), 0px 2px 8px rgba(0, 0, 0, 0.1)'};
     max-height: 95%;
 
     position: absolute;
@@ -102,8 +112,12 @@ const ModalContainer = styled.div<{ visible?: boolean; bgColor?: boolean }>`
         `}
 `;
 
-const ModalText = styled.span`
+const ModalText = styled.div`
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 const IconWrapper = styled(DefaultButton)`

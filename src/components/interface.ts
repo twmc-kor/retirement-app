@@ -97,16 +97,15 @@ export interface IModal {
     visible: boolean;
     bgColor?: string;
     closeBtn?: string;
-    children?: string;
+    big?: boolean;
+    // children?: JSX.Element;
+    children?: any;
 }
 /**
  * Drawer
  */
 export interface IDrawer {
     /** 열기 여부 */
-    open: boolean;
+    open: boolean | null;
     close: () => void;
-
-    /** 하위 컴포넌트 */
-    children: string;
 }

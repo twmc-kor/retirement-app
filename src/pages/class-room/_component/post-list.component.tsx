@@ -22,7 +22,7 @@ export const PostList: FC<IProps> = ({ posts }) => {
             {posts.map((post) => (
                 <PostButton key={`post-item-${post.id}`} post={post} />
             ))}
-            {placeholders.map((item, i) => (
+            {placeholders.map((_, i) => (
                 <PostButton key={`placeholder-${i}`} />
             ))}
         </Container>
