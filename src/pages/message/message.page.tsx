@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import { Button } from '../../components/button.component';
 import { Modal } from '../../components/modal.component';
 import { PageTitle, Container, Text } from '../../components/styles';
+import { useAnalytics } from '../../hooks/useAnalytics.hook';
 import { AddPostInputName, useAddPost } from '../../hooks/useFetch.hook';
+import { AnalyticsScreenEnum, AnalyticsTypeEnum } from '../../services';
 import { Styles } from '../../style/styles';
 
 const MessagePage = (): JSX.Element => {
@@ -13,6 +15,8 @@ const MessagePage = (): JSX.Element => {
     const params = useParams();
 
     const [openModal, setOpenModal] = useState<boolean>(true);
+
+    const logEvent = useAnalytics(AnalyticsScreenEnum.MESSAGE);
 
     const {
         message,
@@ -33,6 +37,7 @@ const MessagePage = (): JSX.Element => {
     };
 
     const handleSubmit = () => {
+        logEvent(AnalyticsTypeEnum.SUBMIT_FOR_REGISTER);
         commit().then(() => navigate('/loading'));
     };
 

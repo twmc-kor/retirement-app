@@ -2,11 +2,15 @@ import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import { Styles } from '../../../style/styles';
 import { IBlackBoard } from '../../../components/interface';
+import { useAnalytics } from '../../../hooks/useAnalytics.hook';
+import { AnalyticsScreenEnum } from '../../../services';
 
 /**
  * 칠판
  */
 export const BlackBoard: FC<IBlackBoard> = ({ dday }) => {
+    useAnalytics(AnalyticsScreenEnum.CLASSROOM);
+
     return (
         <Wrapper>
             <BlackBoardWrapper>
