@@ -71,7 +71,7 @@ export const PageTitle = styled.span<{ sub?: boolean }>`
     ${({ sub }) =>
         sub &&
         css`
-            width: 195px;
+            /* width: 195px; */
             margin: 18px 30px;
             ${Styles.FONT.PAGE_SUB_TEXT};
         `}
