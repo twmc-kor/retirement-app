@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Countdown from 'react-countdown';
+// import Countdown from 'react-countdown';
 import styled, { css } from 'styled-components';
 import { Styles } from '../../../style/styles';
 import { useAnalytics } from '../../../hooks/useAnalytics.hook';
@@ -9,13 +9,13 @@ import { AnalyticsScreenEnum } from '../../../services';
  * 칠판
  */
 
-type CountdownType = {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-    completed: boolean;
-};
+// type CountdownType = {
+//     days: number;
+//     hours: number;
+//     minutes: number;
+//     seconds: number;
+//     completed: boolean;
+// };
 
 export const BlackBoard: FC = () => {
     // const Completionist = () => <Text>전달되었어요! 감사합니다!</Text>;
