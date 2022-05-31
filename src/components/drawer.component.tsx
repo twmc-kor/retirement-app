@@ -17,16 +17,12 @@ export const Drawer: FC<IDrawer> = ({ open, close }) => {
                     <Text>이 프로젝트에</Text>
                     <Text>함께 해주셔서 감사합니다.</Text>
                     <br />
-                    {/* <Text>메세지 전달 상황이</Text>
+                    <Text>메세지 전달 상황이</Text>
                     <Text>궁금하시다면,</Text>
                     <Text>2/18일 이후에도</Text>
                     <Text>이곳에 들러주세요!</Text>
                     <Text>전달 후기를</Text>
                     <Text>업데이트 해둘게요 :)</Text>
-                    <br /> */}
-                    <Text>혹시나 이런 이벤트가</Text>
-                    <Text>필요하시다면</Text>
-                    <Text>연락주세요 :)</Text>
                     <br />
                     <Text>
                         총괄&서버는 아들 <strong>은호</strong>가,

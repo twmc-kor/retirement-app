@@ -71,7 +71,7 @@ export const PageTitle = styled.span<{ sub?: boolean }>`
     ${({ sub }) =>
         sub &&
         css`
-            /* width: 195px; */
+            width: 195px;
             margin: 18px 30px;
             ${Styles.FONT.PAGE_SUB_TEXT};
         `}
@@ -127,8 +127,4 @@ export const DefaultButton = styled.button`
     border-radius: 5px;
     background-color: transparent;
     cursor: pointer;
-
-    /* &:hover {
-        opacity: 0.8;
-    } */
 `;
